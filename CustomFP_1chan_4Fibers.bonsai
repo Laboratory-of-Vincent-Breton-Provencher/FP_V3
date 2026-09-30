@@ -1,0 +1,1120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.9.1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:port="clr-namespace:Bonsai.IO.Ports;assembly=Bonsai.System"
+                 xmlns:gui="clr-namespace:Bonsai.Gui;assembly=Bonsai.Gui"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
+                 xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
+                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
+                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
+                 xmlns:zg="clr-namespace:Bonsai.Gui.ZedGraph;assembly=Bonsai.Gui.ZedGraph"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="StringProperty">
+          <Value>COM4</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="rx:BehaviorSubject">
+        <Name>Arduino COM Port</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="IntProperty">
+          <Value>288000</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="rx:BehaviorSubject">
+        <Name>N Frames</Name>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Initialize</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Arduino COM Port</Name>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="PortName" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="port:CreateSerialPort">
+                <port:PortName>COM4</port:PortName>
+                <port:BaudRate>250000</port:BaudRate>
+                <port:NewLine>\r\n</port:NewLine>
+                <port:Parity>None</port:Parity>
+                <port:ParityReplace>63</port:ParityReplace>
+                <port:DataBits>8</port:DataBits>
+                <port:StopBits>One</port:StopBits>
+                <port:Handshake>None</port:Handshake>
+                <port:DiscardNull>false</port:DiscardNull>
+                <port:DtrEnable>false</port:DtrEnable>
+                <port:RtsEnable>false</port:RtsEnable>
+                <port:ReadBufferSize>4096</port:ReadBufferSize>
+                <port:WriteBufferSize>2048</port:WriteBufferSize>
+                <port:ReceivedBytesThreshold>1</port:ReceivedBytesThreshold>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>0</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Arduino COM Port</Name>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="PortName" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="port:SerialWriteLine">
+                <port:PortName>COM4</port:PortName>
+              </Combinator>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="3" To="6" Label="Source1" />
+            <Edge From="4" To="5" Label="Source1" />
+            <Edge From="5" To="6" Label="Source2" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Rec button workflow</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="BooleanProperty">
+                <Value>false</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="Checked" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="gui:ToggleButtonBuilder">
+              <gui:Name>RecButton</gui:Name>
+              <gui:Enabled>true</gui:Enabled>
+              <gui:Visible>true</gui:Visible>
+              <gui:Font>Microsoft Sans Serif, 27.75pt, style=Bold, Italic</gui:Font>
+              <gui:Text>Record</gui:Text>
+              <gui:Checked>false</gui:Checked>
+            </Expression>
+            <Expression xsi:type="rx:Condition">
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="scr:ExpressionTransform">
+                    <scr:Expression>!it</scr:Expression>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>0</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Arduino COM Port</Name>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="PortName" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="port:SerialWriteLine">
+                <port:PortName>COM4</port:PortName>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="rx:Condition">
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>Y</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Arduino COM Port</Name>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="PortName" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="port:SerialWriteLine">
+                <port:PortName>COM4</port:PortName>
+              </Combinator>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="2" To="8" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="4" To="7" Label="Source1" />
+            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="6" To="7" Label="Source2" />
+            <Edge From="8" To="9" Label="Source1" />
+            <Edge From="9" To="12" Label="Source1" />
+            <Edge From="10" To="11" Label="Source1" />
+            <Edge From="11" To="12" Label="Source2" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="spk:SpinnakerCapture">
+          <spk:Index xsi:nil="true" />
+          <spk:SerialNumber>24208732</spk:SerialNumber>
+          <spk:ColorProcessing>Default</spk:ColorProcessing>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>N Frames</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="Count" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>288000</rx:Count>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Fiber ROI extraction</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>ChunkData.Timestamp</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Image</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="cv:RoiActivity">
+                <cv:Regions>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>342</cv:X>
+                      <cv:Y>0</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>563</cv:X>
+                      <cv:Y>0</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>542</cv:X>
+                      <cv:Y>49</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>463</cv:X>
+                      <cv:Y>74</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>382</cv:X>
+                      <cv:Y>58</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>79</cv:X>
+                      <cv:Y>193</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>261</cv:X>
+                      <cv:Y>193</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>261</cv:X>
+                      <cv:Y>362</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>79</cv:X>
+                      <cv:Y>362</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>585</cv:X>
+                      <cv:Y>112</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>719</cv:X>
+                      <cv:Y>112</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>719</cv:X>
+                      <cv:Y>272</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>585</cv:X>
+                      <cv:Y>272</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>360</cv:X>
+                      <cv:Y>355</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>526</cv:X>
+                      <cv:Y>355</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>526</cv:X>
+                      <cv:Y>508</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>360</cv:X>
+                      <cv:Y>508</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                </cv:Regions>
+                <cv:Operation>Avg</cv:Operation>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Index">
+              <Operand xsi:type="IntProperty">
+                <Value>0</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Activity.Val0</Selector>
+            </Expression>
+            <Expression xsi:type="Index">
+              <Operand xsi:type="IntProperty">
+                <Value>1</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Activity.Val0</Selector>
+            </Expression>
+            <Expression xsi:type="Index">
+              <Operand xsi:type="IntProperty">
+                <Value>2</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Activity.Val0</Selector>
+            </Expression>
+            <Expression xsi:type="Index">
+              <Operand xsi:type="IntProperty">
+                <Value>3</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Activity.Val0</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="cv:RoiActivity">
+                <cv:Regions>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>453</cv:X>
+                      <cv:Y>123</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>453</cv:X>
+                      <cv:Y>142</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>446</cv:X>
+                      <cv:Y>162</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>435</cv:X>
+                      <cv:Y>183</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>426</cv:X>
+                      <cv:Y>199</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>411</cv:X>
+                      <cv:Y>214</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>395</cv:X>
+                      <cv:Y>223</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>374</cv:X>
+                      <cv:Y>234</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>353</cv:X>
+                      <cv:Y>241</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>335</cv:X>
+                      <cv:Y>241</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>315</cv:X>
+                      <cv:Y>241</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>295</cv:X>
+                      <cv:Y>234</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>275</cv:X>
+                      <cv:Y>223</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>260</cv:X>
+                      <cv:Y>214</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>243</cv:X>
+                      <cv:Y>199</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>234</cv:X>
+                      <cv:Y>183</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>223</cv:X>
+                      <cv:Y>162</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>216</cv:X>
+                      <cv:Y>142</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>216</cv:X>
+                      <cv:Y>123</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>216</cv:X>
+                      <cv:Y>103</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>223</cv:X>
+                      <cv:Y>83</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>234</cv:X>
+                      <cv:Y>62</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>243</cv:X>
+                      <cv:Y>48</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>260</cv:X>
+                      <cv:Y>31</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>274</cv:X>
+                      <cv:Y>22</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>295</cv:X>
+                      <cv:Y>11</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>315</cv:X>
+                      <cv:Y>3</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>335</cv:X>
+                      <cv:Y>3</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>353</cv:X>
+                      <cv:Y>3</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>374</cv:X>
+                      <cv:Y>11</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>394</cv:X>
+                      <cv:Y>22</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>411</cv:X>
+                      <cv:Y>31</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>426</cv:X>
+                      <cv:Y>48</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>435</cv:X>
+                      <cv:Y>63</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>446</cv:X>
+                      <cv:Y>83</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>453</cv:X>
+                      <cv:Y>103</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>258</cv:X>
+                      <cv:Y>328</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>257</cv:X>
+                      <cv:Y>353</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>246</cv:X>
+                      <cv:Y>375</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>238</cv:X>
+                      <cv:Y>395</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>227</cv:X>
+                      <cv:Y>413</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>211</cv:X>
+                      <cv:Y>429</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>193</cv:X>
+                      <cv:Y>441</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>173</cv:X>
+                      <cv:Y>451</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>151</cv:X>
+                      <cv:Y>459</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>131</cv:X>
+                      <cv:Y>460</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>106</cv:X>
+                      <cv:Y>459</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>84</cv:X>
+                      <cv:Y>451</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>64</cv:X>
+                      <cv:Y>441</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>46</cv:X>
+                      <cv:Y>429</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>30</cv:X>
+                      <cv:Y>413</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>18</cv:X>
+                      <cv:Y>395</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>8</cv:X>
+                      <cv:Y>375</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>0</cv:X>
+                      <cv:Y>353</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>0</cv:X>
+                      <cv:Y>328</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>0</cv:X>
+                      <cv:Y>308</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>8</cv:X>
+                      <cv:Y>286</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>18</cv:X>
+                      <cv:Y>266</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>30</cv:X>
+                      <cv:Y>248</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>46</cv:X>
+                      <cv:Y>232</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>64</cv:X>
+                      <cv:Y>220</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>84</cv:X>
+                      <cv:Y>213</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>106</cv:X>
+                      <cv:Y>202</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>131</cv:X>
+                      <cv:Y>201</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>151</cv:X>
+                      <cv:Y>202</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>173</cv:X>
+                      <cv:Y>213</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>193</cv:X>
+                      <cv:Y>220</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>211</cv:X>
+                      <cv:Y>232</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>227</cv:X>
+                      <cv:Y>248</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>238</cv:X>
+                      <cv:Y>266</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>246</cv:X>
+                      <cv:Y>286</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>257</cv:X>
+                      <cv:Y>308</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>711</cv:X>
+                      <cv:Y>210</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>709</cv:X>
+                      <cv:Y>230</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>704</cv:X>
+                      <cv:Y>251</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>696</cv:X>
+                      <cv:Y>271</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>683</cv:X>
+                      <cv:Y>287</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>668</cv:X>
+                      <cv:Y>302</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>652</cv:X>
+                      <cv:Y>315</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>632</cv:X>
+                      <cv:Y>323</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>611</cv:X>
+                      <cv:Y>328</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>591</cv:X>
+                      <cv:Y>330</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>570</cv:X>
+                      <cv:Y>328</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>549</cv:X>
+                      <cv:Y>323</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>529</cv:X>
+                      <cv:Y>315</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>513</cv:X>
+                      <cv:Y>302</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>498</cv:X>
+                      <cv:Y>287</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>485</cv:X>
+                      <cv:Y>271</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>477</cv:X>
+                      <cv:Y>251</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>472</cv:X>
+                      <cv:Y>230</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>470</cv:X>
+                      <cv:Y>210</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>472</cv:X>
+                      <cv:Y>189</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>477</cv:X>
+                      <cv:Y>168</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>485</cv:X>
+                      <cv:Y>148</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>498</cv:X>
+                      <cv:Y>132</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>513</cv:X>
+                      <cv:Y>117</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>529</cv:X>
+                      <cv:Y>104</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>549</cv:X>
+                      <cv:Y>96</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>570</cv:X>
+                      <cv:Y>91</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>591</cv:X>
+                      <cv:Y>89</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>611</cv:X>
+                      <cv:Y>91</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>632</cv:X>
+                      <cv:Y>96</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>652</cv:X>
+                      <cv:Y>104</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>668</cv:X>
+                      <cv:Y>117</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>683</cv:X>
+                      <cv:Y>132</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>696</cv:X>
+                      <cv:Y>148</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>704</cv:X>
+                      <cv:Y>168</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>709</cv:X>
+                      <cv:Y>189</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                </cv:Regions>
+                <cv:Operation>Avg</cv:Operation>
+              </Combinator>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="0" To="2" Label="Source1" />
+            <Edge From="1" To="12" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="2" To="14" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="3" To="6" Label="Source1" />
+            <Edge From="3" To="8" Label="Source1" />
+            <Edge From="3" To="10" Label="Source1" />
+            <Edge From="4" To="5" Label="Source1" />
+            <Edge From="5" To="12" Label="Source2" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="7" To="12" Label="Source3" />
+            <Edge From="8" To="9" Label="Source1" />
+            <Edge From="9" To="12" Label="Source4" />
+            <Edge From="10" To="11" Label="Source1" />
+            <Edge From="11" To="12" Label="Source5" />
+            <Edge From="12" To="13" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Read Controller State</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Arduino COM Port</Name>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="PortName" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="port:SerialReadLine">
+                <port:PortName>COM4</port:PortName>
+                <port:NewLine>\r\n</port:NewLine>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT0.1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:SkipUntil" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item2</Selector>
+            </Expression>
+            <Expression xsi:type="Parse">
+              <Pattern>%i</Pattern>
+              <Separator>,</Separator>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item1</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="6" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="5" Label="Source1" />
+            <Edge From="4" To="5" Label="Source2" />
+            <Edge From="5" To="6" Label="Source2" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="6" To="9" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="8" To="10" Label="Source1" />
+            <Edge From="9" To="10" Label="Source2" />
+            <Edge From="10" To="11" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="scr:ExpressionTransform">
+        <scr:Expression>new(item1[0] as V, item1[1] as B,    item1[2] as G,    item1[3] as TTL,    item1[4] as mode,    item1[6] as ts_arduino,  item1[7] as ts_arduino_ttl,    item2.item1 as ts_ch1,    item2.item2 as f0_ch1,    item2.item3 as f1_ch1,    item2.item4 as f2_ch1, item2.item5 as f3_ch1,    (item1[0]==1 ? "410" : (item1[1]==1 ? "470" : (item1[2]==1 ? "565" : "unknown"))) as Channel)</scr:Expression>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>FP_1ch_.csv</io:FileName>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>Timestamp</io:Suffix>
+        <io:IncludeHeader>true</io:IncludeHeader>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Display Graph</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="rx:Condition">
+              <Name>SelectISO</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="scr:ExpressionTransform">
+                    <scr:Expression>it.V == 1</scr:Expression>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
+            <Expression xsi:type="zg:RollingGraphBuilder">
+              <zg:ValueSelector>TTL</zg:ValueSelector>
+              <zg:SymbolType>None</zg:SymbolType>
+              <zg:LineWidth>1</zg:LineWidth>
+              <zg:CurveSettings />
+              <zg:Capacity>300</zg:Capacity>
+              <zg:Min>-0.1</zg:Min>
+              <zg:Max>1.1</zg:Max>
+            </Expression>
+            <Expression xsi:type="rx:Condition">
+              <Name>SelectSIGNAL</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="scr:ExpressionTransform">
+                    <scr:Expression>it.B == 1</scr:Expression>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f0_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f0_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:WithLatestFrom" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>new(item2 as ISO_0,
+    item1 as SIGNAL_0)</scr:Expression>
+            </Expression>
+            <Expression xsi:type="zg:RollingGraphBuilder">
+              <zg:ValueSelector>ISO_0,SIGNAL_0</zg:ValueSelector>
+              <zg:SymbolType>None</zg:SymbolType>
+              <zg:LineWidth>2</zg:LineWidth>
+              <zg:CurveSettings>
+                <zg:CurveConfiguration>
+                  <zg:Label>Violet</zg:Label>
+                  <zg:Color>#C000C0</zg:Color>
+                </zg:CurveConfiguration>
+                <zg:CurveConfiguration>
+                  <zg:Label>Blue</zg:Label>
+                  <zg:Color>Blue</zg:Color>
+                </zg:CurveConfiguration>
+              </zg:CurveSettings>
+              <zg:Capacity>300</zg:Capacity>
+              <zg:Min xsi:nil="true" />
+              <zg:Max xsi:nil="true" />
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f1_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f1_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:WithLatestFrom" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>new(item2 as ISO_1,
+    item1 as SIGNAL_1)</scr:Expression>
+            </Expression>
+            <Expression xsi:type="zg:RollingGraphBuilder">
+              <zg:ValueSelector>ISO_1,SIGNAL_1</zg:ValueSelector>
+              <zg:SymbolType>None</zg:SymbolType>
+              <zg:LineWidth>2</zg:LineWidth>
+              <zg:CurveSettings>
+                <zg:CurveConfiguration>
+                  <zg:Label>Violet</zg:Label>
+                  <zg:Color>#C000C0</zg:Color>
+                </zg:CurveConfiguration>
+                <zg:CurveConfiguration>
+                  <zg:Label>Blue</zg:Label>
+                  <zg:Color>Blue</zg:Color>
+                </zg:CurveConfiguration>
+              </zg:CurveSettings>
+              <zg:Capacity>300</zg:Capacity>
+              <zg:Min xsi:nil="true" />
+              <zg:Max xsi:nil="true" />
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f2_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f2_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:WithLatestFrom" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>new(item2 as ISO_2,
+    item1 as SIGNAL_2)</scr:Expression>
+            </Expression>
+            <Expression xsi:type="zg:RollingGraphBuilder">
+              <zg:ValueSelector>ISO_2,SIGNAL_2</zg:ValueSelector>
+              <zg:SymbolType>None</zg:SymbolType>
+              <zg:LineWidth>2</zg:LineWidth>
+              <zg:CurveSettings>
+                <zg:CurveConfiguration>
+                  <zg:Label>Violet</zg:Label>
+                  <zg:Color>#C000C0</zg:Color>
+                </zg:CurveConfiguration>
+                <zg:CurveConfiguration>
+                  <zg:Label>Blue</zg:Label>
+                  <zg:Color>Blue</zg:Color>
+                </zg:CurveConfiguration>
+              </zg:CurveSettings>
+              <zg:Capacity>300</zg:Capacity>
+              <zg:Min xsi:nil="true" />
+              <zg:Max xsi:nil="true" />
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f3_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>f3_ch1</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:WithLatestFrom" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>new(item2 as ISO_3,
+    item1 as SIGNAL_3)</scr:Expression>
+            </Expression>
+            <Expression xsi:type="zg:RollingGraphBuilder">
+              <zg:ValueSelector>ISO_3,SIGNAL_3</zg:ValueSelector>
+              <zg:SymbolType>None</zg:SymbolType>
+              <zg:LineWidth>2</zg:LineWidth>
+              <zg:CurveSettings>
+                <zg:CurveConfiguration>
+                  <zg:Label>Violet</zg:Label>
+                  <zg:Color>#C000C0</zg:Color>
+                </zg:CurveConfiguration>
+                <zg:CurveConfiguration>
+                  <zg:Label>Blue</zg:Label>
+                  <zg:Color>Blue</zg:Color>
+                </zg:CurveConfiguration>
+              </zg:CurveSettings>
+              <zg:Capacity>300</zg:Capacity>
+              <zg:Min xsi:nil="true" />
+              <zg:Max xsi:nil="true" />
+            </Expression>
+            <Expression xsi:type="gui:TableLayoutPanelBuilder">
+              <gui:Name>ComboGraph</gui:Name>
+              <gui:Enabled>true</gui:Enabled>
+              <gui:Visible>true</gui:Visible>
+              <gui:Font>Arial, 8.25pt</gui:Font>
+              <gui:ColumnCount>1</gui:ColumnCount>
+              <gui:RowCount>5</gui:RowCount>
+              <gui:ColumnStyles />
+              <gui:RowStyles />
+              <gui:CellSpans />
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="0" To="3" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="1" To="5" Label="Source1" />
+            <Edge From="1" To="10" Label="Source1" />
+            <Edge From="1" To="15" Label="Source1" />
+            <Edge From="1" To="20" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="3" To="9" Label="Source1" />
+            <Edge From="3" To="14" Label="Source1" />
+            <Edge From="3" To="19" Label="Source1" />
+            <Edge From="4" To="6" Label="Source1" />
+            <Edge From="5" To="6" Label="Source2" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="9" To="11" Label="Source1" />
+            <Edge From="10" To="11" Label="Source2" />
+            <Edge From="11" To="12" Label="Source1" />
+            <Edge From="12" To="13" Label="Source1" />
+            <Edge From="14" To="16" Label="Source1" />
+            <Edge From="15" To="16" Label="Source2" />
+            <Edge From="16" To="17" Label="Source1" />
+            <Edge From="17" To="18" Label="Source1" />
+            <Edge From="19" To="21" Label="Source1" />
+            <Edge From="20" To="21" Label="Source2" />
+            <Edge From="21" To="22" Label="Source1" />
+            <Edge From="22" To="23" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="6" To="9" Label="Source1" />
+      <Edge From="7" To="8" Label="Source1" />
+      <Edge From="8" To="9" Label="Source2" />
+      <Edge From="9" To="10" Label="Source1" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="12" Label="Source1" />
+      <Edge From="12" To="13" Label="Source1" />
+      <Edge From="12" To="14" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
