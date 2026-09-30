@@ -8,19 +8,20 @@ imaged onto a camera.
 Two microcontrollers run the system:
 
 - a **controller** that sets the timing of the light sources and the camera acquisition;
-- a **DAQ** that reports the state of the light sources to the computer, where a Bonsai
-  workflow saves it alongside the fluorescence signal from each fiber.
+- a **DAQ** that reports the state of the light sources to the computer, 
 
-In the standard mode the system alternates violet (405/410 nm, isosbestic) and blue
+The computer runs a Bonsai to saves the state of the lights sources alongside the fluorescence signal from each fiber.
+
+In the standard mode the system alternates violet (405 nm, isosbestic) and blue
 (470 nm, signal) excitation, one wavelength per camera frame, at 40 frames per second.
 In use in the VBP lab since 2022.
 
 **Please cite:**
 Bouchard S, Boutin J, Lévesque M, et al. *Region-specific weighting of sensory intensity
 and reward prediction error by dopamine signals.* iScience, 2026; 29.
-https://www.cell.com/iscience/fulltext/S2589-0042(26)02508-3
+https://doi.org/10.1016/j.isci.2026.117130
 
-> A STAR Protocols paper describing this system is in preparation.
+> A STAR Protocols for using this system, implanting the fibers, and training head fixed mice is in preparation.
 
 ---
 
