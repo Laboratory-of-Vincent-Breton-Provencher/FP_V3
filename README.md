@@ -355,7 +355,9 @@ Open `CustomFP_1chan_4Fibers.bonsai` and set:
 6. **Fiber ROIs** in the `RoiActivity` node. Draw one ROI per fiber. ROI order sets the
    column names: ROI 0 → `f0_ch1`, and so on. Label each fiber physically with its ID and
    match the ROIs to those IDs. With fewer than four fibers, park the unused ROIs on an
-   empty part of the image.
+   empty part of the image. 
+   [More info on how to edit ROI here.](https://bonsai-rx.org/docs/api/Bonsai.Vision.RoiActivity.html) 
+   Note: Changes to ROIs are only kept if you stop running Bonsai and save.
 7. **Check for cross-talk:** block the light in front of one fiber and confirm that the
    other ROI values don't change.
 
@@ -394,7 +396,9 @@ the layout is remembered for next time.
 
 ## 7. Recording
 
-**Before recording:** Connect the fibers to the fiber adapter. With the LED driver set to constant current mode (CW), measure the **470 nm** output of each fiber. Adjust each of them into the 30–50 µW range. Put back to LED driver to trigger mode (TRIG).
+**Before recording:** Connect the fibers to the fiber adapter. With the LED driver set to 
+constant current mode (CW), measure the **470 nm** output of each fiber. Adjust each of them 
+into the 30–50 µW range. Put back to LED driver to trigger mode (TRIG).
 
 1. Connect the fibers to the implanted ferrules.
 2. Adjust the power on the **405 nm** channel:
