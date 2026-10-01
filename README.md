@@ -10,7 +10,8 @@ Two microcontrollers run the system:
 - a **controller** that sets the timing of the light sources and the camera acquisition;
 - a **DAQ** that reports the state of the light sources to the computer, 
 
-The computer runs a Bonsai to saves the state of the lights sources alongside the fluorescence signal from each fiber.
+The computer runs a Bonsai to saves the state of the lights sources alongside the 
+fluorescence signal from each fiber.
 
 In the standard mode the system alternates violet (405 nm, isosbestic) and blue
 (470 nm, signal) excitation, one wavelength per camera frame, at 40 frames per second.
@@ -21,7 +22,8 @@ Bouchard S, Boutin J, Lévesque M, et al. *Region-specific weighting of sensory 
 and reward prediction error by dopamine signals.* iScience, 2026; 29.
 https://doi.org/10.1016/j.isci.2026.117130
 
-> A STAR Protocols for using this system, implanting the fibers, and training head fixed mice is in preparation.
+> A STAR Protocols for using this system, implanting the fibers, and training head fixed
+mice is in preparation.
 
 ---
 
@@ -43,22 +45,7 @@ https://doi.org/10.1016/j.isci.2026.117130
 
 ## 1. System overview
 
-```
-                 mode (3 lines)
-   ┌───────────┐ ───────────────►  ┌────────────┐  camera trigger   ┌────────┐
-   │   DAQ     │                   │ Controller │ ────────────────► │ Camera │
-   │ Arduino   │ ◄───────────────  │  Arduino   │                   └────┬───┘
-   │   UNO     │  LED state taps   │    Nano    │  ──► 410 driver        │ USB 3.0
-   └─────┬─────┘                   └────────────┘  ──► 470 driver        │
-         │ USB (serial, 250000 baud)                ──► 565 driver       │
-         │                                                              │
-   ┌─────▼──────────────────────────────────────────────────────────────▼───┐
-   │                      Computer running Bonsai                           │
-   │   log line per frame  +  image per frame   ──►   one CSV file          │
-   └────────────────────────────────────────────────────────────────────────┘
-
-   External TTL (e.g. trial start from a behaviour rig) ──► DAQ D8
-```
+<img src = "Figures/Fig_SystemOverview.png" alt="Overview" width="700">
 
 Each camera frame is illuminated by exactly one LED. The controller cycles through the
 enabled LEDs, one per frame, so with two wavelengths each channel is effectively sampled
