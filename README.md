@@ -1,29 +1,15 @@
 # Multi-fiber Fiber Photometry System (FP V3)
 
-A fiber photometry system that records from more than one fiber at a time. The optics
-follow an epifluorescence microscope design, except that the excitation light is focused
-onto the back of a multi-core patch cable and the light emitted by each fiber core is
-imaged onto a camera.
+A fiber photometry system that records from more than one fiber at a time. The system 
+was developed by the VBP lab and has been in use since 2022.
 
-Two microcontrollers run the system:
-
-- a **controller** that sets the timing of the light sources and the camera acquisition;
-- a **DAQ** that reports the state of the light sources to the computer, 
-
-The computer runs a Bonsai script to save the state of the light sources alongside the 
-fluorescence signal from each fiber.
-
-In the standard mode the system alternates violet (405 nm, isosbestic) and blue
-(470 nm, signal) excitation, one wavelength per camera frame, at 40 frames per second.
-In use in the VBP lab since 2022.
-
-**Please cite:**
+If you use the system in your research **please cite:**
 Bouchard S, Boutin J, Lévesque M, et al. *Region-specific weighting of sensory intensity
 and reward prediction error by dopamine signals.* iScience, 2026; 29.
 https://doi.org/10.1016/j.isci.2026.117130
 
-> A STAR Protocols for using this system, implanting the fibers, and training head fixed
-mice is in preparation.
+> A STAR Protocols paper for using this system, implanting the fibers, and training head-fixed
+> mice is in preparation.
 
 ---
 
