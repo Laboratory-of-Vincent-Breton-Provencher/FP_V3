@@ -390,27 +390,23 @@ the layout is remembered for next time.
 
 ---
 
-## 7. Running a recording
+## 7. Recording
 
-### Before each session
-
-1. Connect the fibers and measure the **470 nm** output of each: adjust into the 30–50 µW
-   range.
-2. Start the Bonsai workflow and press the **Record** toggle button.
-3. Adjust the **405 nm** channel with its knob until its trace matches the 470 nm trace in
-   the live graphs.
-4. Press the record toggle again to stop.
-
-
-### Recording
+**Before recording:** Connect the fibers to the fiber adapter. Measure the **470 nm** output of each: adjust into the 30–50 µW range.
 
 1. Connect the fibers to the implanted ferrules.
-2. Start the Bonsai workflow.
-3. Press the **Record** toggle button. This sends `Y` (410/470) to the DAQ and starts the LEDs,
+2. Adjust the power on the **405 nm** channel:
+   2a.Start the Bonsai workflow and press the **Record** toggle button. This sends `Y` (410/470) to the DAQ and starts the LEDs,
+      the camera and the CSV writing.
+   2b. Adjust the **405 nm** channel with its knob until its trace matches the 470 nm trace in
+      the live graphs.
+   2c. Press the **Record** toggle again to stop. Stop the Bonsai workflow and delete the files that were saved during the adjustment.
+3. Start the Bonsai workflow.
+4. Press the **Record** toggle button. This sends `Y` (410/470) to the DAQ and starts the LEDs,
    the camera and the CSV writing.
-4. During the recording, watch the live traces and check that TTLs are being detected. If TTLs are to be recorded, confirm the cable is connected to DAQ D8.
-5. Press the toggle again to stop. This sends `0`, which stops the LEDs and the triggers.
-6. **Stop the Bonsai workflow.** A new CSV is only created when the workflow starts, so
+5. During the recording, watch the live traces and check that TTLs are being detected. If TTLs are to be recorded, confirm the cable is connected to DAQ D8.
+6. Press **Record** again to stop. This sends `0`, which stops the LEDs and the triggers.
+7. **Stop the Bonsai workflow.** A new CSV is only created when the workflow starts, so
    leaving it running puts the next recording in the same file.
 
 Toggling the record button on and off during a session is safe. Each block appears in the
