@@ -194,7 +194,7 @@ The case is 3D printed; the model is [available here](3D%20print/).
 <img src = "Figures/Fig_circuitWiring.png" alt="Wiring" width="500">
 </p>
 
-**Figure 5. Circuit wiring.** 
+**Figure 5. Circuit wiring.** Note: all components should be connected to a common ground.
 
 ### 4.1 Controller (Arduino Nano) — `FP_camLED_controller.ino`
 
@@ -203,7 +203,7 @@ Reads the requested mode on D10–D12 and drives the camera and the LED drivers 
 
 | Pin | Direction | Connected to |
 |---|---|---|
-| D2 | out | Camera trigger (both cameras, Line 3 in SpinView) |
+| D2 | out | Camera trigger (both cameras, Line 3 in SpinView).  For more pin info [click here](https://softwareservices.flir.com/BFS-U3-50S5/latest/50-Quality/GPIOTest.htm)|
 | D4 | out | 410 nm LED driver, and DAQ D4 |
 | D5 | out | 470 nm LED driver, and DAQ D5 |
 | D10, D11, D12 | in | Mode lines V, B, G from DAQ D10, D11, D12 |
@@ -222,9 +222,6 @@ Frame timing at 40 Hz:
         ▲ frame start (FALLING edge)
 ```
 
-Each frame starts exactly one period after the previous one (a fixed schedule, not a
-measured delay), so there is no cumulative drift over a long recording.
-
 ### 4.2 DAQ (Arduino UNO) — `FP_DAQ.ino`
 
 Connected to the computer over USB. It sets the mode for the controller, watches the LED
@@ -232,19 +229,10 @@ driver lines, and prints one line per frame at **250000 baud**.
 
 | Pin | Direction | Connected to |
 |---|---|---|
-| D4, D5 | in | Taps of the controller's 410 / 470 driver lines |
+| D4, D5 | in | Controller's 410 / 470 driver lines |
 | D8 | in | External TTL (e.g. trial start from a behaviour system) |
-| D10, D11, D12 | out | Mode lines V, B, G to controller D10, D11, D12. These are also connected to common ground with 10 kΩ pull-down resistors |
+| D10, D11, D12 | out | Mode lines V, B, G to controller D10, D11, D12. These required pull-down resistors (10 kΩ to ground). |
 | GND | — | Common ground |
-
-Because the DAQ reads the driver lines themselves, the logged LED state is hardware ground
-truth, not just what the software intended.
-
-**Pull-down resistors (10 kΩ to GND) are required** on the mode lines at the controller
-end, on the LED taps at the DAQ end, and on the external TTL input. Without them, a pin
-floats whenever the other board is reset or a cable is unplugged, and reads unpredictably.
-Note that opening a serial port resets an Arduino, so this happens every time Bonsai or the
-IDE connects.
 
 ### 4.3 Modes and serial commands
 
@@ -266,10 +254,14 @@ The system boots in OFF and stays there until a command arrives, so nothing is i
 or triggered until you ask for it. Changing mode restarts the LED cycle at the first
 enabled wavelength, which is why each recording block starts on 410.
 
+> **Note.** The controller and the DAQ implement modes for a third excitation source
+> (565 nm), but the current setup uses only 405 and 470 nm. Because a 410/10 bandpass
+> filter sits in front of the 405 nm LED, this channel is referred to as either 405 or 410
+> throughout the system; `410` is the value written in the `Channel` column of the CSV.
+
 ### 4.4 Line format sent by the DAQ
 
-One line per frame, emitted at the LED onset. With `LOG_TIMESTAMP = true` (the current
-setting) there are 8 fields:
+One line per frame, emitted at the LED onset. There are 8 fields:
 
 ```
 V,B,G,TTL,mode,FLAG,t_onset,t_ttl
@@ -285,9 +277,6 @@ V,B,G,TTL,mode,FLAG,t_onset,t_ttl
 | `t_onset` | Arduino `micros()` at the LED onset of this frame |
 | `t_ttl` | Arduino `micros()` of the TTL rising edge reported on this line, 0 if none |
 
-Setting `LOG_TIMESTAMP = false` drops the last two fields; the Bonsai workflow expects
-them, so leave it as it is.
-
 ---
 
 ## 5. Software installation
@@ -295,29 +284,57 @@ them, so leave it as it is.
 ### 5.1 Arduino
 
 1. Install the Arduino IDE.
-2. In **Tools → Board → Boards Manager**, install the board package for your Nano.
+2. In **Tools → Board → Boards Manager**, install the board package for your Nano. The system has been tested with the Nano Every board.
 3. Upload `FP_camLED_controller.ino` to the **Nano** and `FP_DAQ.ino` to the **UNO**.
-   Check the COM port for each before uploading. The controller only needs this once.
-4. The system can be driven without Bonsai: open the IDE serial monitor on the DAQ's port
+   Check the COM port for each before uploading. The controller only needs this once. Take note of the DAQ COM port. The COM port will be requested by the Bonsai script.
+4. Test that the DAQ and the system can be driven without Bonsai: open the IDE serial monitor on the DAQ's port
    at **250000 baud** and type `Y` (two LEDs) or `X` (three LEDs), or `0` to stop.
-   Close the serial monitor before running Bonsai — only one program can hold the port.
-
+   
 ### 5.2 Camera (Spinnaker)
 
 1. Install `SpinnakerSDK_FULL_4.2.0.83_x64.exe`. This version works with the current
-   Bonsai.Spinnaker package (see https://github.com/bonsai-rx/spinnaker). The installer is
-   on the NAS, as Teledyne no longer lists this version publicly.
-2. Choose the **full SDK** and the **Application Development** option. The GigE driver
+   Bonsai.Spinnaker package (see https://github.com/bonsai-rx/spinnaker). For VBP lab member, the installer is
+   on our NAS. Other users should contact support at Teledyne as they no longer lists this version publicly.
+2. Choose, the **full SDK** and the **Application Development** option. The GigE driver
    component can be deselected.
 3. Connect the camera and confirm it streams in SpinView.
-4. Apply the settings in the screenshots: exposure **16999 µs**, plus the Image Format and
-   GPIO pages. Sequencer and Features stay at their defaults.
-5. **Trigger settings:** trigger source Line 3, and trigger activation on the **falling**
-   edge — the controller's trigger line idles HIGH and goes LOW for the excitation window,
-   so the falling edge marks the frame start and the exposure sits inside the LED pulse.
-   Rising edge would start each exposure during the dark gap, capturing the *next* frame's
-   LED while the row is labelled with the current one.
-6. Save the settings as a user profile in SpinView so they survive a reconnection.
+4. Apply the settings below. Anything not listed stays at its default; the Imaging Format, Processing,
+   Sequencer and Features tabs are not modified.
+5. Save the configuration as a user set in the camera so it survives a reconnection.
+
+Reference configuration, for a **Blackfly S BFS-U3-04S2M** (firmware 1707.1.6.0):
+
+**Settings tab**
+
+| Setting | Value | Why |
+|---|---|---|
+| Acquisition Mode | Continuous | |
+| Acquisition Frame Rate Enable | unchecked | The frame rate comes from the controller's trigger, not the camera |
+| Exposure Mode | Timed | Exposure length is set here, not by the trigger pulse width |
+| Exposure Auto | Off | Must be fixed, or the two wavelengths are exposed differently |
+| Exposure Time | 16999 µs | Must fit inside the 24.5 ms LED pulse 17ms is what we commonly use. Issues with dropped frame increases with exposure time. |
+| Gain Auto | Off | Must be fixed, for the same reason as exposure |
+| Gain | 34.3 dB | Adjust per setup; see the note below |
+| Gamma Enable | unchecked | Keeps the response linear, which fluorescence quantification requires |
+| Black Level | 0 % | |
+| Device Link Throughput Limit | 60000000 | |
+
+**GPIO tab**
+
+| Setting | Value | Why |
+|---|---|---|
+| Trigger Selector | Frame Start | |
+| Trigger Mode | On | |
+| Trigger Source | Line 3 | The controller's D2 output |
+| Trigger Activation | Falling Edge | The trigger line idles HIGH and goes LOW for the excitation window |
+| Trigger Overlap | Off | |
+| Trigger Delay | 9 µs | Minimum permitted value |
+| Line Selector / Line Mode | Line 0 / Input | |
+
+> **Note on dynamic range.** Mono8 gives 256 intensity levels. If your 
+> recorded ROI values are sitting at or near 255, where a fluorescence
+> transient is clipped and lost, lower the camera gain first. The gain also lowers noise. Then, lower the LED power. The camera supports **Mono16**, which would give
+> considerably more headroom and is worth testing with the Bonsai workflow.
 
 ### 5.3 Bonsai
 
@@ -336,12 +353,14 @@ In **Tools → Manage Packages**, install:
 
 ## 6. First-time configuration
 
+Make sure to close the serial monitor in the Arduino IDE before running Bonsai — only one program can hold the port.
+
 Open `CustomFP_1chan_4Fibers.bonsai` and set:
 
 1. **Camera serial number** in the `SpinnakerCapture` node (dropdown).
-2. **COM port** of the DAQ, in the `String` node feeding the `Arduino COM Port` subject.
+2. **COM port** of the DAQ, in the `String` node feeding the `Arduino COM Port` subject (see step 5.1.3).
 3. **Recording length** in the `N Frames` node. This is a total frame count, so at 40 fps:
-   288000 = 2 h, 144000 = 1 h, 72000 = 30 min. Acquisition stops on its own at this count.
+   288000 = 2 h, 144000 = 1 h, 72000 = 30 min. Acquisition stops on its own at this count. It is better to use a larger length than needed. The acquisition can also be manually stopped.
 4. **Fiber ROIs** in the `RoiActivity` node. Connect the fibers, then draw one ROI per
    fiber. ROI order sets the column names: ROI 0 → `f0_ch1`, and so on. Label each fiber
    physically with its ID and match the ROIs to those IDs. With fewer than four fibers,
@@ -349,8 +368,20 @@ Open `CustomFP_1chan_4Fibers.bonsai` and set:
 5. **Check for cross-talk:** block the light in front of one fiber and confirm the other
    ROI values don't change.
 
-The graph windows and their positions are stored in `CustomFP_1chan_4Fibers.bonsai.layout`
-next to the workflow. Keep that file with the workflow when copying it.
+The visualizer windows and their positions are stored in
+`CustomFP_1chan_4Fibers.bonsai.layout` file. If the graphs or the record
+button do not appear when you start the workflow, that file is missing or out of date, and
+the windows have to be opened manually:
+
+| Window | Where | Node to double-click |
+|---|---|---|
+| Live traces | `Display Graph` | `ComboGraph` |
+| Record button | `Rec button workflow` | `RecButton` |
+| Fiber ROIs | `Fiber ROI extraction` | `RoiActivity` |
+
+Use the Explorer panel in the lower left corner to navigate into each group. The workflow
+must be running for a visualizer to open. Once all three are open and positioned, stop the
+workflow and save it (Ctrl+S) so the layout is remembered for next time.
 
 ---
 
