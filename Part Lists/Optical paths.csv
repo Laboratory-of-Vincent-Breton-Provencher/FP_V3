@@ -1,0 +1,40 @@
+﻿Name,Link,Qty,Source,Cat #, Price each (USD)* , Total ,Notes
+"T-Cube LED Driver, 1200 mA Max Drive Current",https://www.thorlabs.com/item/LEDD1B,2,Thorlabs,LEDD1B, $380.04 , $760.08 ,
+"Power Supply Unit with 3.5 mm Jack Connector for One K- or T-Cube 15 V, 2.66 A ",https://www.thorlabs.com/item/KPS201,2,Thorlabs,KPS201, $43.15 , $86.30 ,
+"470 nm, 809 mW (Min) Mounted LED, 1000 mA",https://www.thorlabs.com/item/m470l5,1,Thorlabs,M470L5, $261.20 , $261.20 ,
+"Ø1"" Bandpass Filter, CWL = 470 ± 2 nm, FWHM = 10 ± 2 nm",https://www.thorlabs.com/item/FBH470-10,1,Thorlabs,FBH470-10, $193.82 , $193.82 ,
+"405 nm, 1000 mW (Min) Mounted LED, 1000 mA",https://www.thorlabs.com/item/M405L4?aID=a056b4baa5de84c94eeb4c008f644e86&aC=1,1,Thorlabs,M405L4, $274.16 , $274.16 ,
+"Hard-Coated Bandpass Filter, Ø25 mm, CWL = 405 nm, FWHM = 10 nm",https://www.thorlabs.com/item/FBH405-10?aID=72a807b1ebba4cd8c32fe8aa78364fae&aC=1,1,Thorlabs,FBH405-10, $193.82 , $193.82 ,
+"N-BK7 Plano-Convex Lens, Ø1"", f = 25 mm, Uncoated",https://www.thorlabs.com/item/LA1951?aID=9504e5e6d022440e60bb8b6b7970e9ba&aC=1,2,Thorlabs,LA1951, $28.95 , $57.90 ,
+"SM1 Lens Tube, 1.50"" Thread Depth",https://www.thorlabs.com/item/SM1L15,2,Thorlabs,SM1L15, $18.17 , $36.34 ,
+"SM1 Retaining Ring for Ø1"" Lens Tubes and Mounts, 10 Pack",https://www.thorlabs.com/item/SM1RR-P10,1,Thorlabs,SM1RR-P10, $46.88 , $46.88 ,
+"SM1 (1.035""-40) Coupler, External Threads, 0.5"" Long, Two Locking Rings",https://www.thorlabs.com/item/SM1T2,3,Thorlabs,SM1T2, $25.29 , $75.87 ,3rd one for the camera
+30 mm Cage Cube,https://www.thorlabs.com/item/C4W,2,Thorlabs,C4W, $75.32 , $150.64 ,
+Externally SM1-Threaded End Cap,https://www.thorlabs.com/item/SM1CP2,2,Thorlabs,SM1CP2, $22.13 , $44.26 ,
+Blank Cover Plate,https://www.thorlabs.com/item/B1C,2,Thorlabs,B1C, $23.39 , $46.78 ,
+Fixed Cage Cube Platform for C4W/C6WR,https://www.thorlabs.com/item/B3C,2,Thorlabs,B3C, $31.02 , $62.04 ,
+30-mm-Cage-Compatible Rectangular Filter Mount,https://www.thorlabs.com/item/FFM1,2,Thorlabs,FFM1, $72.77 , $145.54 ,
+"25 mm x 36 mm Longpass Dichroic Mirror, 425 nm Cut-On",https://www.thorlabs.com/item/DMLP425R,1,Thorlabs,DMLP425R, $298.70 , $298.70 ,
+30 mm Cage Cube Connector for C4W and C6WR Series Cubes,https://www.thorlabs.com/item/C4W-CC?aID=05cea842c430325db5eaebcb8b348e42&aC=1,1,Thorlabs,C4W-CC, $64.20 , $64.20 ,
+"Ø1/2"" Optical Post, SS, 8-32 Setscrew, 1/4""-20 Tap, L = 2""",https://www.thorlabs.com/item/TR2,2,Thorlabs,TR2, $6.31 , $12.62 ,
+"Ø1/2"" Post Holder, Spring-Loaded Hex-Locking Thumbscrew, L = 2""",https://www.thorlabs.com/item/PH2,2,Thorlabs,PH2, $9.58 , $19.16 ,
+"1/4""-20 Stainless Steel Setscrew, 5/8"" Long, 25 Pack",https://www.thorlabs.com/item/SS25S0625,1,Thorlabs,SS25S0625, $7.46 , $7.46 ,You only need two for attach the post holder to the breadboard
+"Cage Assembly Rod, 3"" Long, Ø6 mm, 4 Pack",https://www.thorlabs.com/item/ER3-P4?aID=01b3557baf2733f4397297e08478e846&aC=2,1,Thorlabs,ER3-P4, $29.02 , $29.02 ,
+"FC/PC Fiber Adapter Plate with External SM1 (1.035""-40) Threads, Wide Key (2.2 mm)",https://www.thorlabs.com/item/SM1FC,1,Thorlabs,SM1FC, $36.86 , $36.86 ,
+"30 mm Cage System, XY Translating Lens Mount for Ø1"" Optics",https://www.thorlabs.com/item/CXY1A?aID=5f6e1a3dfebfdd3d7206ff5e9ce5c25e&aC=1,1,Thorlabs,CXY1A, $215.57 , $215.57 ,
+"20X Evident Plan Achromat Objective, 0.40 NA, 1.2 mm WD",https://www.thorlabs.com/item/RMS20X?aID=2df9ef8807fd1ac0e8a50986c0c29f82&aC=1,1,Thorlabs,RMS20X, $554.20 , $554.20 ,Also tried with this objective but way more expensive: https://www.edmundoptics.ca/p/olympus-uplxapo-10x-objective/43024/
+"SM1 Lens Tube, 0.30"" Thread Depth",https://www.thorlabs.com/item/SM1L03,1,Thorlabs,SM1L03, $14.07 , $14.07 ,For holding the objective
+535/22 nm BrightLine® single-band bandpass filter ,https://www.idex-hs.com/store/product-detail/ff01_535_22_25,1,IDEX Health & Science,FL-003976, $318.78 , $318.78 ,Semrock part #FF01-535/22-25
+495 nm edge BrightLine® single-edge standard epi-fluorescence dichroic beamsplitter,https://www.idex-hs.com/store/product-detail/ff495_di03_25x36?search=true,1,IDEX Health & Science,FL-007145, $308.66 , $308.66 ,Semrock part # FF495-Di03-25x36
+"f=35 mm, Ø1"" Achromatic Doublet, SM1-Threaded Mount, ARC: 400-700 nm",https://www.thorlabs.com/item/AC254-035-A-ML,1,Thorlabs,AC254-035-A-ML, $133.46 , $133.46 ,
+"BFS-U3-04S2M-CS USB 3.1 Blackfly® S, Monochrome Camera",https://www.edmundoptics.ca/p/bfs-u3-04s2m-cs-usb3-blackflyreg-s-monochrome-camera/40161/,1,Edmund Optics,11-505, $541.50 , $541.50 ,Teledyne part # BFS-U3-04S2M-CS
+"Teledyne FLIR Type-A to Micro-B, USB 3.1 Locking Cable, 3m",https://www.edmundoptics.ca/p/usb-30-locking-cable-3m-length/29172/,1,Edmund Optics,86-770, $41.00 , $41.00 ,
+"Blackfly S/Blackfly 6-pin GPIO Hirose Connector Cable, 1m",https://www.edmundoptics.ca/p/blackflyreg-6-pin-gpio-hirose-connector-1m-cable/30349/,1,Edmund Optics,88-064 , $38.00 , $38.00 ,
+"Aluminum Breadboard 12"" x 12"" x 1/2"", 1/4""-20 Taps",https://www.thorlabs.com/item/MB12?aID=90c1048a0fb55e9c6df63419d38347cc&aC=2,1,Thorlabs,MB12, $184.47 , $184.47 ,
+"1/4""-20 Stainless Steel Cap Screw, 1/2"" Long, 25 Pack",https://www.thorlabs.com/item/SH25S050,1,Thorlabs,SH25S050, $10.11 , $10.11 ,Need only a few
+Low-Autofluorescence Fiber-optic Patch Cord,https://neuro.doriclenses.com/collections/branching-fiber-optic-patchcords,1,Doric Lenses,MFP_400/440/1100-0.37_2m_FC-MF1.25_LAF, $307.00 , $307.00 ,1 fiber option (price is from 2023)
+Low-Autofluorescence Bundle Branching Fiber-optic Patch Cord,https://neuro.doriclenses.com/collections/branching-fiber-optic-patchcords,1,Doric Lenses,BBP(2)_400/440/900-0.37_2m_FCM-2xMF1.25_LAF, $552.30 , $552.30 ,2 fiber option (price is from 2023)
+Low-Autofluorescence Bundle Branching Fiber-optic Patch Cord,https://neuro.doriclenses.com/collections/branching-fiber-optic-patchcords,1,Doric Lenses,BBP(4)_400/440/900-0.37_2m_FCM-4xMF1.25_LAF," $1,002.20 "," $1,002.20 ",4 fiber option (price is from 2023)
+,,,,,,,
+,,,,,,,
+*: Updated September 2026,,,,,," $7,124.97 ",
