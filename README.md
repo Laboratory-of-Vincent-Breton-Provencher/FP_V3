@@ -357,11 +357,15 @@ Open `CustomFP_1chan_4Fibers.bonsai` and set:
 7. **Check for cross-talk:** block the light in front of one fiber and confirm that the
    other ROI values don't change.
 
+**Note on visualizer windows**
+
 <p align="center">
-<img src = "Figures/Fig_NavigationWindow.png" alt="Visualizer windows" width="500">
+  <img src="Figures/Fig_NavigationWindow.png" alt="Bonsai editor with the Explorer panel and the visualizer windows open" width="500">
 </p>
 
-**Figure 6. Visualizer windows.**
+**Figure 6. Visualizer windows.** The Explorer panel, lower left, is used to navigate into
+each group workflow; double-clicking a node there opens its visualizer while the workflow
+runs.
 
 The visualizer windows and their positions are stored in the
 `CustomFP_1chan_4Fibers.bonsai.layout` file. If the graphs or the record button do not
@@ -375,8 +379,14 @@ have to be opened manually:
 | Fiber ROIs | `Fiber ROI extraction` | `RoiActivity` |
 
 Use the Explorer panel in the lower left corner to navigate into each group. The workflow
-must be running for a visualizer to open. Once all three are open and positioned, stop the
-workflow and save it (Ctrl+S) so the layout is remembered for next time.
+must be running for a visualizer to open.
+
+If double-clicking `ComboGraph` opens an empty window, the individual graphs have to be
+added to it: drag each `RollingGraph` node from the `Display Graph` workflow onto the
+`ComboGraph` window, starting from the top one (TTL) so they appear in the intended order.
+
+Once all the windows are open and positioned, stop the workflow and save it (Ctrl+S) so
+the layout is remembered for next time.
 
 ---
 
@@ -431,6 +441,8 @@ restarts at 410 after every mode change, so parity is not reliable across blocks
 470 ppm, which is about 3.4 s over a 2 hour recording. `ts_ch1` is the one attached to the
 images and is the better choice for analysis. `ts_arduino` is the right one for lining up
 external TTL events, since `ts_arduino_ttl` comes from the same clock.
+
+> **Note** need to add info on how signal is processed. Also include a python script for showing basic processing of data.
 
 ---
 
