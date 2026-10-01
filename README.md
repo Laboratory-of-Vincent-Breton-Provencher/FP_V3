@@ -45,7 +45,9 @@ mice is in preparation.
 
 ## 1. System overview
 
+<p align="center">
 <img src = "Figures/Fig_SystemOverview.png" alt="Overview" width="700">
+</p>
 
 Two microcontrollers, a camera and a set of LED drivers run the system, with a computer recording the result.
 
@@ -62,7 +64,9 @@ emitted by the sample returns along the same path to the camera.
 The **computer** runs a Bonsai script to extract the mean intensity inside one ROI per fiber and pair it with the LED state, 
 and writes everything to a CSV file. 
 
+<p align="center">
 <img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
+</p>
 
 ---
 
