@@ -69,7 +69,7 @@ The **computer** runs a Bonsai script to extract the mean intensity inside one R
 and writes everything to a CSV file. 
 
 <p align="center">
-<img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
+<img src = "Figures/Fig_SignalProcessing.png" alt="Signal processing" width="700">
 
 **Figure 2. Signal acquisition and demultiplexing.**
 </p>
@@ -103,7 +103,7 @@ is split afterwards into one signal per wavelength.
 ## 3. Optical path
 
 <p align="center">
-<img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
+<img src = "Figures/Fig_lightpath.png" alt="Optical path" width="500">
 
 **Figure 3. Optical path.**
 </p>
