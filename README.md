@@ -129,11 +129,11 @@ sensors such as GRAB-DA or nLightG.
 
 See the [list of optical components](Part%20Lists/Optical%20paths.csv).
 
-1. Assemble both dichroic cubes (Thorlabs #C4W). Fix the bottom plates (B1C). Attach the
+1. **Assemble both dichroic cubes** (Thorlabs #C4W). Fix the bottom plates (B1C). Attach the
    dichroic filter holder (FFM1) to the rotating platform (B3C) and temporarily fix each
    platform on top of the cubes. Join the cubes with the C4W-CC piece. Mount the cubes on
    the breadboard with optical posts.
-2. Build the excitation arms. In a 1½ inch lens tube, insert the bandpass filter for that wavelength. 
+2. **Build the excitation arms.** In a 1½ inch lens tube, insert the bandpass filter for that wavelength. 
    Add the collimating lens, flat side toward the LED, about 25 mm
    from the source, which is its focal length. Note that a Thorlabs mounted LED sits
    slightly inside the tube; use its spec sheet to calculate the position within the tube.
@@ -147,25 +147,36 @@ See the [list of optical components](Part%20Lists/Optical%20paths.csv).
    
    Screw each tube into its cube using a
    lens tube coupler with two retaining rings (SM1T2), then add the mounted LEDs.
-3. Insert the dichroics on each rotating platform (see step 1). The coated side must face
+3. **Install the dichroics.** Insert the dichroics on each rotating platform (see step 1). The coated side must face
    the light sources. Adjust the angle of each dichroic so that both LEDs reach the
-   objective.
-4. Assemble the objective and fiber adapter. Screw a short lens tube into the cube, then
+   back aperture of the objective.
+4. **Assemble the objective and fiber adapter**. Screw a short lens tube into the cube, then
    the objective adapter around the objective and into the tube. The objective must be
    tight and immobile. Add the cage mount and the fiber adapter.
-5. Assemble the emission path. Screw in a lens tube coupler with two retaining rings (SM1T2) to the emission dichroic cube.
+5. **Assemble the emission path**. Screw in a lens tube coupler with two retaining rings (SM1T2) to the emission dichroic cube.
    Screw in the achromat lens (already mounted in a tube). Insert a
    bandpass filter in a short lens tube and screw next to the achromat, and then the camera. 
 
 ### Alignment
 
-Do this in the dark. Target output is **45–55 µW per fiber per wavelength**, and the fiber
-bundle must stay inside the camera frame throughout.
+Perform these alignment steps in the dark. The target output is **35–55 µW per fiber per
+wavelength**, and the fiber bundle must stay inside the camera frame throughout.
 
-1. Before adding the objective, adjust the dichroics so the paths are aligned.
-2. With one fiber, adjust x and y with the CXY1A screws to maximise output power. Repeat
-   for every wavelength.
-3. With several fibers, repeat step 2 to minimise the power differences between fibers.
+1. **Align the dichroics.** Remove the fiber adapter (CXY1A) and place a power meter in
+   front of the objective. Turn on the 470 nm LED only and adjust the angle of the 495
+   dichroic to maximise the power at the objective, then secure its rotating plate. Next, turn on the 405 nm
+   LED only and adjust the angle of the 425 dichroic to maximise the power. Keep this order: the 470 nm path depends only on the 495 dichroic, whereas
+   the 405 nm path passes through both.
+2. **Focus the fiber adapter on the camera.** Put the fiber adapter back in place and
+   connect an optical patch cable. Slide the adapter along the cage rods to move it in Z
+   until the fiber face is in focus on the camera, then secure it in place.
+3. **Maximise the power in one fiber.** With a single fiber connected, adjust x and y with
+   the CXY1A screws to maximise the output power. Repeat for every wavelength. The optimum
+   position may differ slightly between 405 and 470 nm; in that case, split the difference
+   between the two.
+4. **Balance the fibers.** With several fibers connected, repeat step 3 to minimise the
+   power differences between them.
+
 
 ---
 
