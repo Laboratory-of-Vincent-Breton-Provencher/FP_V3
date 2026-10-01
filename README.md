@@ -47,8 +47,11 @@ mice is in preparation.
 
 <p align="center">
 <img src = "Figures/Fig_SystemOverview.png" alt="Overview" width="700">
-</p>
+
 **Figure 1. Overview of system components**
+</p>
+
+
 
 Two microcontrollers, a camera and a set of LED drivers run the system, with a computer recording the result.
 
@@ -67,15 +70,17 @@ and writes everything to a CSV file.
 
 <p align="center">
 <img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
+
+**Figure 2. Signal acquisition and demultiplexing.**
 </p>
-**Figure 2. Signal acquisition and demultiplexing.** The controller triggers the camera at 40 Hz and alternates the LEDs so that each frame 
+
+The controller triggers the camera at 40 Hz and alternates the LEDs so that each frame 
 is illuminated by exactly one wavelength. The exposure sits inside the LED pulse, and 
-each wavelength is therefore acquired at half the frame rate. 
+each wavelength is therefore acquired at 20 Hz. 
 
 The raw intensity measured in one fiber ROI alternates between the two wavelengths from 
 frame to frame. Because the state of every LED is recorded alongside each frame, the trace 
-is split afterwards into one signal per wavelength, each sampled at the acquisition rate. 
-The same demultiplexing is applied independently to every fiber.
+is split afterwards into one signal per wavelength.
 
 ---
 
