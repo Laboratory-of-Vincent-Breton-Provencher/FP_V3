@@ -7,6 +7,14 @@ Analysis/
 # Mac/OSX
 .DS_Store
 
+# Microsoft Office lock/temp files
+~$*
+*.tmp
+
+# Excel/Word autorecover
+*.xlk
+~WRL*.tmp
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
