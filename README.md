@@ -21,7 +21,7 @@ https://doi.org/10.1016/j.isci.2026.117130
 - [4. Electronics](#4-electronics)
 - [5. Software installation](#5-software-installation)
 - [6. First-time configuration](#6-first-time-configuration)
-- [7. Running a recording](#7-running-a-recording)
+- [7. Recording](#7-recording)
 - [8. Output data](#8-output-data)
 - [9. Validating a recording](#9-validating-a-recording)
 - [10. Troubleshooting](#10-troubleshooting)
