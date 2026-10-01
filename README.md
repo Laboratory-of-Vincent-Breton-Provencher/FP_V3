@@ -334,25 +334,39 @@ In **Tools → Manage Packages**, install:
 
 ## 6. First-time configuration
 
-Make sure to close the serial monitor in the Arduino IDE before running Bonsai — only one program can hold the port.
+Close the serial monitor in the Arduino IDE before running Bonsai — only one program can
+hold the port.
 
 Open `CustomFP_1chan_4Fibers.bonsai` and set:
 
 1. **Camera serial number** in the `SpinnakerCapture` node (dropdown).
-2. **COM port** of the DAQ, in the `String` node feeding the `Arduino COM Port` subject (see step 5.1.3).
+2. **COM port** of the DAQ, in the `String` node feeding the `Arduino COM Port` subject
+   (see step 5.1.3).
 3. **Recording length** in the `N Frames` node. This is a total frame count, so at 40 fps:
-   288000 = 2 h, 144000 = 1 h, 72000 = 30 min. Acquisition stops on its own at this count. It is better to use a larger length than needed. The acquisition can also be manually stopped.
-4. **Fiber ROIs** in the `RoiActivity` node. Connect the fibers, then draw one ROI per
-   fiber. ROI order sets the column names: ROI 0 → `f0_ch1`, and so on. Label each fiber
-   physically with its ID and match the ROIs to those IDs. With fewer than four fibers,
-   park the unused ROIs on an empty part of the image.
-5. **Check for cross-talk:** block the light in front of one fiber and confirm the other
-   ROI values don't change.
+   288000 = 2 h, 144000 = 1 h, 72000 = 30 min. Acquisition stops on its own at this count,
+   and can also be stopped manually at any time, so set it longer than you expect to need.
+4. **Start the workflow** with F5, or Workflow → Start. Check that the visualizer windows
+   appear (see **Figure 6**); if they don't, which is usually the case the first time, see the note below.
+5. **Turn the LEDs on** by pressing `Record`, so the fibers become visible. Without a mode
+   command the LEDs stay off and the camera image is dark. The command can also be sent
+   from the Arduino IDE serial monitor, but not while Bonsai holds the port.
+6. **Fiber ROIs** in the `RoiActivity` node. Draw one ROI per fiber. ROI order sets the
+   column names: ROI 0 → `f0_ch1`, and so on. Label each fiber physically with its ID and
+   match the ROIs to those IDs. With fewer than four fibers, park the unused ROIs on an
+   empty part of the image.
+7. **Check for cross-talk:** block the light in front of one fiber and confirm that the
+   other ROI values don't change.
 
-The visualizer windows and their positions are stored in
-`CustomFP_1chan_4Fibers.bonsai.layout` file. If the graphs or the record
-button do not appear when you start the workflow, that file is missing or out of date, and
-the windows have to be opened manually:
+<p align="center">
+<img src = "Figures/Fig_NavigationWindow.png" alt="Visualizer windows" width="500">
+</p>
+
+**Figure 6. Visualizer windows.**
+
+The visualizer windows and their positions are stored in the
+`CustomFP_1chan_4Fibers.bonsai.layout` file. If the graphs or the record button do not
+appear when you start the workflow, that file is missing or out of date, and the windows
+have to be opened manually:
 
 | Window | Where | Node to double-click |
 |---|---|---|
