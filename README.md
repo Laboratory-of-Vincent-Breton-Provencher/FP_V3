@@ -115,7 +115,8 @@ reflects them into the objective (10X air NA 0.25, or 20X air NA 0.4) and
 into the fiber.
 
 Light emitted by the specimen returns along the same path, passes through the 495 nm
-dichroic, and is filtered by a bandpass filter before reaching the sCMOS camera.
+dichroic, and is filtered by a bandpass filter before reaching the sCMOS camera through 
+an achromatic tube lens.
 
 The 405 nm channel serves as the isosbestic point for most sensors, and is used
 to correct the 470 nm signal for motion artefacts. With green detection around 535 nm, the
@@ -128,22 +129,31 @@ sensors such as GRAB-DA or nLightG.
 
 See the [list of optical components](Part%20Lists/Optical%20paths.csv).
 
-1. Assemble both dichroic cubes: fix the bottom (B1C) and top (B3C) plates, then join the
-   cubes with the C4W-CC piece. The optics go in later. Mount the cubes on the board,
-   raised 1½ inch on optical posts.
-2. Build the excitation arms. In a 1½ inch lens tube (longer tubes allow finer LED
-   positioning), insert the bandpass filter for that wavelength — the arrow on its edge
-   shows the orientation. Add the collimating lens, flat side toward the LED, about 1 inch
-   from the source, which is its focal length. Allow for the LED die sitting slightly
-   inside the tube; the exact figure is on the mounted LED's spec sheet. Thorlabs spanner
-   tools have graduations that help. Screw each tube into its cube and add the mounted LED.
-3. Insert the dichroics and check that both LEDs reach the objective.
-4. Assemble the objective: a short lens tube into the cube, the objective adapter around
-   the objective and into the tube. The objective must be tight and immobile. Add the cage
-   mount and the fiber adapter.
-5. Assemble the emission path: the achromat lens the right way round, then the bandpass
-   filter in a short lens tube, then the camera. Adjust the fiber adapter in front of the
-   objective to get the sharpest image at the camera.
+1. Assemble both dichroic cubes (Thorlabs #C4W). Fix the bottom plates (B1C). Attach the
+   dichroic filter holder (FFM1) to the rotating platform (B3C) and temporarily fix each
+   platform on top of the cubes. Join the cubes with the C4W-CC piece. Mount the cubes on
+   the breadboard with optical posts.
+2. Build the excitation arms. In a 1½ inch lens tube, insert the bandpass filter for that wavelength. 
+   Add the collimating lens, flat side toward the LED, about 25 mm
+   from the source, which is its focal length. Note that a Thorlabs mounted LED sits
+   slightly inside the tube; use its spec sheet to calculate the position within the tube.
+   Thorlabs spanner tools have graduations that help.
+   To check collimation, hold the finished tube about 50 cm from a wall and turn the LED
+   on: the spot should be roughly the same diameter as the tube's aperture (1 inch) and
+   should not change noticeably as you move the tube closer or further away. A spot that
+   grows with distance means the lens is too close to the LED; one that converges first
+   means it is too far.
+   Screw each tube into its cube using a
+   lens tube coupler with two retaining rings (SM1T2), then add the mounted LEDs.
+3. Insert the dichroics on each rotating platform (see step 1). The coated side must face
+   the light sources. Adjust the angle of each dichroic so that both LEDs reach the
+   objective.
+4. Assemble the objective and fiber adapter. Screw a short lens tube into the cube, then
+   the objective adapter around the objective and into the tube. The objective must be
+   tight and immobile. Add the cage mount and the fiber adapter.
+5. Assemble the emission path. Screw in a lens tube coupler with two retaining rings (SM1T2) to the emission dichroic cube.
+   Screw in the achromat lens (already mounted in a tube). Insert a
+   bandpass filter in a short lens tube and screw next to the achromat, and then the camera. 
 
 ### Alignment
 
