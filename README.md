@@ -102,6 +102,12 @@ is split afterwards into one signal per wavelength.
 
 ## 3. Optical path
 
+<p align="center">
+<img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
+
+**Figure 3. Optical path.**
+</p>
+
 Excitation light from a 405 nm LED (isosbestic reference) and a 470 nm LED (signal) passes
 through a bandpass filter and a collimating lens (plano-convex, 1 inch focal length). A
 longpass dichroic with a 425 nm cut-on combines the two beams. A second longpass dichroic,
