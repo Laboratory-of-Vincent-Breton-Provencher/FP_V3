@@ -104,24 +104,25 @@ is split afterwards into one signal per wavelength.
 
 <p align="center">
 <img src = "Figures/Fig_lightpath.png" alt="Optical path" width="500">
+</p>
+
+<p align="center">
 
 **Figure 3. Optical path.**
 </p>
-
 Excitation light from a 405 nm LED (isosbestic reference) and a 470 nm LED (signal) passes
-through a bandpass filter and a collimating lens (plano-convex, 1 inch focal length). A
-longpass dichroic with a 425 nm cut-on combines the two beams. A second longpass dichroic,
-cut-on 495 nm, reflects them into the objective (10X air NA 0.25, or 20X air NA 0.4) and
+through a bandpass filter and a collimating lens (plano-convex, 25 mm focal length). A
+longpass dichroic (425 nm) combines the two beams. A second longpass dichroic (495 nm), 
+reflects them into the objective (10X air NA 0.25, or 20X air NA 0.4) and
 into the fiber.
 
 Light emitted by the specimen returns along the same path, passes through the 495 nm
-dichroic, is corrected by an achromat acquisition lens, and is filtered by a bandpass
-filter around 535 nm so that only the emitted green light reaches the sCMOS camera.
+dichroic, and is filtered by a bandpass filter before reaching the sCMOS camera.
 
-The 405 nm channel serves as the isosbestic point for most sensors used here, and is used
+The 405 nm channel serves as the isosbestic point for most sensors, and is used
 to correct the 470 nm signal for motion artefacts. With green detection around 535 nm, the
-system works with calcium sensors such as GCaMP8s and GCaMP8f, and with neuromodulator
-sensors such as GRAB-NE.
+system works with calcium sensors such as GCaMP, and with neuromodulator
+sensors such as GRAB-DA or nLightG.
 
 ### Assembly
 
