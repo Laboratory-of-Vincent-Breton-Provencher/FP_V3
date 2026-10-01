@@ -10,7 +10,7 @@ Two microcontrollers run the system:
 - a **controller** that sets the timing of the light sources and the camera acquisition;
 - a **DAQ** that reports the state of the light sources to the computer, 
 
-The computer runs a Bonsai to saves the state of the lights sources alongside the 
+The computer runs a Bonsai script to save the state of the light sources alongside the 
 fluorescence signal from each fiber.
 
 In the standard mode the system alternates violet (405 nm, isosbestic) and blue
@@ -48,6 +48,7 @@ mice is in preparation.
 <p align="center">
 <img src = "Figures/Fig_SystemOverview.png" alt="Overview" width="700">
 </p>
+**Figure 1. Overview of system components**
 
 Two microcontrollers, a camera and a set of LED drivers run the system, with a computer recording the result.
 
@@ -67,6 +68,16 @@ and writes everything to a CSV file.
 <p align="center">
 <img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
 </p>
+**Figure 2. Signal acquisition and demultiplexing.** 
+
+The controller triggers the camera at 40 Hz and alternates the LEDs so that each frame 
+is illuminated by exactly one wavelength. The exposure sits inside the LED pulse, and 
+each wavelength is therefore acquired at half the frame rate. 
+
+The raw intensity measured in one fiber ROI alternates between the two wavelengths from 
+frame to frame. Because the state of every LED is recorded alongside each frame, the trace 
+is split afterwards into one signal per wavelength, each sampled at the acquisition rate. 
+The same demultiplexing is applied independently to every fiber.
 
 ---
 
