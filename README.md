@@ -206,7 +206,6 @@ Reads the requested mode on D10–D12 and drives the camera and the LED drivers 
 | D2 | out | Camera trigger (both cameras, Line 3 in SpinView) |
 | D4 | out | 410 nm LED driver, and DAQ D4 |
 | D5 | out | 470 nm LED driver, and DAQ D5 |
-| D6 | out | 565 nm LED driver, and DAQ D6 |
 | D10, D11, D12 | in | Mode lines V, B, G from DAQ D10, D11, D12 |
 | GND | — | Common ground with DAQ, camera and LED drivers |
 
@@ -233,9 +232,9 @@ driver lines, and prints one line per frame at **250000 baud**.
 
 | Pin | Direction | Connected to |
 |---|---|---|
-| D4, D5, D6 | in | Taps of the controller's 410 / 470 / 565 driver lines |
+| D4, D5 | in | Taps of the controller's 410 / 470 driver lines |
 | D8 | in | External TTL (e.g. trial start from a behaviour system) |
-| D10, D11, D12 | out | Mode lines V, B, G to controller D10, D11, D12 |
+| D10, D11, D12 | out | Mode lines V, B, G to controller D10, D11, D12. These are also connected to common ground with 10 kΩ pull-down resistors |
 | GND | — | Common ground |
 
 Because the DAQ reads the driver lines themselves, the logged LED state is hardware ground
