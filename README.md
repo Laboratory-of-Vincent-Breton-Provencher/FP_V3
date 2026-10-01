@@ -442,7 +442,7 @@ restarts at 410 after every mode change, so parity is not reliable across blocks
 images and is the better choice for analysis. `ts_arduino` is the right one for lining up
 external TTL events, since `ts_arduino_ttl` comes from the same clock.
 
-> **Note** need to add info on how signal is processed. Also include a python script for showing basic processing of data.
+> **Note** We need to add info on how signal is processed. Also include a python script for showing basic processing of data.
 
 ---
 
