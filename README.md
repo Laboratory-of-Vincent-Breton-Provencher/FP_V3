@@ -125,8 +125,6 @@ sensors such as GRAB-DA or nLightG.
 
 ### Assembly
 
-> **TO DO**: Add picture of the optical set up
-
 See the [list of optical components](Part%20Lists/Optical%20paths.csv).
 
 <p align="center">
@@ -134,7 +132,7 @@ See the [list of optical components](Part%20Lists/Optical%20paths.csv).
 </p>
 
 **Figure 4. The assembled set up.** The optical path, the LED drivers and the microcontrollers
-mounted on a single breadboard. Dashed boxes mark the components labelled in Figure 3.
+mounted on a single breadboard.
 
 1. **Assemble both dichroic cubes** (Thorlabs #C4W). Fix the bottom plates (B1C). Attach the
    dichroic filter holder (FFM1) to the rotating platform (B3C) and temporarily fix each
@@ -192,7 +190,11 @@ wavelength**, and the fiber bundle must stay inside the camera frame throughout.
 You will need a half-size protoboard, female BNC connectors and cables. See the [list of electronics](Part%20Lists/Electronics.csv). 
 The case is 3D printed; the model is [available here](3D%20print/).
 
-> **TO DO**: Add circuit wiring
+<p align="center">
+<img src = "Figures/Fig_circuitWiring.png" alt="Wiring" width="500">
+</p>
+
+**Figure 5. Circuit wiring.** 
 
 ### 4.1 Controller (Arduino Nano) — `FP_camLED_controller.ino`
 
