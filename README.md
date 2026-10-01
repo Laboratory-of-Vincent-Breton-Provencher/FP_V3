@@ -138,11 +138,13 @@ See the [list of optical components](Part%20Lists/Optical%20paths.csv).
    from the source, which is its focal length. Note that a Thorlabs mounted LED sits
    slightly inside the tube; use its spec sheet to calculate the position within the tube.
    Thorlabs spanner tools have graduations that help.
+
    To check collimation, hold the finished tube about 50 cm from a wall and turn the LED
    on: the spot should be roughly the same diameter as the tube's aperture (1 inch) and
    should not change noticeably as you move the tube closer or further away. A spot that
    grows with distance means the lens is too close to the LED; one that converges first
    means it is too far.
+   
    Screw each tube into its cube using a
    lens tube coupler with two retaining rings (SM1T2), then add the mounted LEDs.
 3. Insert the dichroics on each rotating platform (see step 1). The coated side must face
