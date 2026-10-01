@@ -124,6 +124,10 @@ sensors such as GRAB-DA or nLightG.
 
 ### Assembly
 
+> **TO DO**: Add picture of the optical set up
+
+See the [list of optical components](Part%20Lists/Optical%20paths.xlsx).
+
 1. Assemble both dichroic cubes: fix the bottom (B1C) and top (B3C) plates, then join the
    cubes with the C4W-CC piece. The optics go in later. Mount the cubes on the board,
    raised 1½ inch on optical posts.
