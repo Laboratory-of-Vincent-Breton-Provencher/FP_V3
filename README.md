@@ -68,9 +68,7 @@ and writes everything to a CSV file.
 <p align="center">
 <img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
 </p>
-**Figure 2. Signal acquisition and demultiplexing.** 
-
-The controller triggers the camera at 40 Hz and alternates the LEDs so that each frame 
+**Figure 2. Signal acquisition and demultiplexing.** The controller triggers the camera at 40 Hz and alternates the LEDs so that each frame 
 is illuminated by exactly one wavelength. The exposure sits inside the LED pulse, and 
 each wavelength is therefore acquired at half the frame rate. 
 
