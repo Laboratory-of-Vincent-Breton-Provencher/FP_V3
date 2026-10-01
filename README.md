@@ -331,11 +331,6 @@ Reference configuration, for a **Blackfly S BFS-U3-04S2M** (firmware 1707.1.6.0)
 | Trigger Delay | 9 µs | Minimum permitted value |
 | Line Selector / Line Mode | Line 0 / Input | |
 
-> **Note on dynamic range.** Mono8 gives 256 intensity levels. If your 
-> recorded ROI values are sitting at or near 255, where a fluorescence
-> transient is clipped and lost, lower the camera gain first. The gain also lowers noise. Then, lower the LED power. The camera supports **Mono16**, which would give
-> considerably more headroom and is worth testing with the Bonsai workflow.
-
 ### 5.3 Bonsai
 
 Install Bonsai (tested with **2.9.1**): https://bonsai-rx.org/docs/articles/installation.html
@@ -487,6 +482,10 @@ connected.
 
 ## 11. Known limitations
 
-- **The camera-to-serial pairing is positional.** Images and log lines are matched by
-  arrival order, not by timestamp. It has held up in testing, but a single dropped frame
-  would offset everything after it, which is why the alignment check in section 9 matters.
+-  **The camera-to-serial pairing is positional.** Images and log lines are matched by
+   arrival order, not by timestamp. It has held up in testing, but a single dropped frame
+   would offset everything after it, which is why the alignment check in section 9 matters.
+-  **Note on dynamic range.** Mono8 gives 256 intensity levels. If your 
+   recorded ROI values are sitting at or near 255, where a fluorescence
+   transient is clipped and lost, lower the camera gain first. The gain also lowers noise. Then, lower the LED power. The camera supports **Mono16**, which would give
+   considerably more headroom and is worth testing with the Bonsai workflow.
