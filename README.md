@@ -47,13 +47,22 @@ mice is in preparation.
 
 <img src = "Figures/Fig_SystemOverview.png" alt="Overview" width="700">
 
-Each camera frame is illuminated by exactly one LED. The controller cycles through the
-enabled LEDs, one per frame, so with two wavelengths each channel is effectively sampled
-at 20 Hz, and with three at 13.3 Hz.
+Two microcontrollers, a camera and a set of LED drivers run the system, with a computer recording the result.
 
-The controller runs from its own timebase and does not talk to the computer. This means
-the acquisition timing is unaffected by anything happening on the PC, and the controller
-can be powered from a USB charger once its sketch is uploaded.
+The **DAQ** (Arduino UNO) is the only board connected to the computer. It receives the requested mode from 
+Bonsai over USB and passes it to the controller. It also reads the LED sate from the controller and sends it to the computer,
+together with the state of an external TTL input (D8) for events from a behaviour system.
+
+The **controller** (Arduino Nano) triggers the **camera** and switches the **LED drivers** so that each frame is illuminated 
+by exactly one wavelength.
+
+The **optics** focus the light sources (405 and 470 nm) onto the back of a multi-core patch cable, and the fluorescence 
+emitted by the sample returns along the same path to the camera.
+
+The **computer** runs a Bonsai script to extract the mean intensity inside one ROI per fiber and pair it with the LED state, 
+and writes everything to a CSV file. 
+
+<img src = "Figures/Fig_SignalProcessing.png" alt="Overview" width="700">
 
 ---
 
