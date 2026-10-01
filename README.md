@@ -391,19 +391,19 @@ workflow and save it (Ctrl+S) so the layout is remembered for next time.
 
 1. Connect the fibers and measure the **470 nm** output of each: adjust into the 30–50 µW
    range.
-2. Start the Bonsai workflow and press the **record toggle**.
+2. Start the Bonsai workflow and press the **Record** toggle button.
 3. Adjust the **405 nm** channel with its knob until its trace matches the 470 nm trace in
    the live graphs.
 4. Press the record toggle again to stop.
-5. If TTLs are to be recorded, confirm the cable is connected to DAQ D8.
+
 
 ### Recording
 
 1. Connect the fibers to the implanted ferrules.
 2. Start the Bonsai workflow.
-3. Press the **record toggle**. This sends `Y` (410/470) to the DAQ and starts the LEDs,
+3. Press the **Record** toggle button. This sends `Y` (410/470) to the DAQ and starts the LEDs,
    the camera and the CSV writing.
-4. During the recording, watch the live traces and check that TTLs are being detected.
+4. During the recording, watch the live traces and check that TTLs are being detected. If TTLs are to be recorded, confirm the cable is connected to DAQ D8.
 5. Press the toggle again to stop. This sends `0`, which stops the LEDs and the triggers.
 6. **Stop the Bonsai workflow.** A new CSV is only created when the workflow starts, so
    leaving it running puts the next recording in the same file.
@@ -479,32 +479,14 @@ previous session. The workflow drops everything that arrives in the first moment
 press the record toggle off before stopping the workflow, so the DAQ isn't logging while
 the port is closed.
 
-**The violet and blue traces drift apart in the display.** This was caused by `Zip` pairing
-the two branches by position and queueing the odd frame left over at each toggle. The
-display now uses `WithLatestFrom`, which cannot accumulate an offset. If you rebuild the
-display, do not go back to `Zip` there. The CSV was never affected.
-
-**A command sent right after connecting has no effect.** Opening the port resets the UNO,
-and the bootloader eats anything sent in the first 1–2 s. Wait about 2 s before sending.
-
 **The camera does not trigger.** Check the trigger source is Line 3, the activation edge is
 falling, the exposure is shorter than 24.5 ms, and that the camera and Arduino grounds are
 connected.
 
 ---
 
-## 11. Known limitations and to-do
+## 11. Known limitations
 
-- **Output TTL on controller D7 is not implemented.** The current controller sketch has no
-  D7 output. If a 40 Hz sync pulse for a downstream device is needed, it has to be added.
-- **The record button only selects mode `Y`** (410/470). Other modes need a command typed
-  into the serial monitor, or a change to the string node in the `Rec button workflow`.
 - **The camera-to-serial pairing is positional.** Images and log lines are matched by
   arrival order, not by timestamp. It has held up in testing, but a single dropped frame
   would offset everything after it, which is why the alignment check in section 9 matters.
-- **8-bit pixel depth** limits the dynamic range. If the camera supports Mono16, using it
-  would give considerably more headroom.
-- **Pull-down resistors** are required but easy to forget when rebuilding a rig.
-
-> **TODO:** wiring diagram; optical path drawing; setup photo; SpinView screenshots;
-> part list links; description of the analysis pipeline downstream of the CSV.
