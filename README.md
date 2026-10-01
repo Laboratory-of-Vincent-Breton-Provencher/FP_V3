@@ -242,6 +242,7 @@ enabled wavelength, which is why each recording block starts on 410.
 
 > **Note.** The controller and the DAQ implement modes for a third excitation source
 > (565 nm), but the current setup uses only 405 and 470 nm. 
+> 
 > Because a 410/10 bandpass
 > filter sits in front of the 405 nm LED, this channel is referred to as either 405 or 410
 > throughout the system; `410` is the value written in the `Channel` column of the CSV.
