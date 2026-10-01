@@ -182,8 +182,10 @@ wavelength**, and the fiber bundle must stay inside the camera frame throughout.
 
 ## 4. Electronics
 
-You will need a half-size protoboard, female BNC connectors and cables. The case is 3D
-printed; the model is on the NAS.
+You will need a half-size protoboard, female BNC connectors and cables. See the [list of electronics](Part%20Lists/Electronics.csv). 
+The case is 3D printed; the model is [available here](3D%20print/).
+
+> **TO DO**: Add circuit wiring
 
 ### 4.1 Controller (Arduino Nano) — `FP_camLED_controller.ino`
 
