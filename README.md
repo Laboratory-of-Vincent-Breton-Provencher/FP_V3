@@ -129,6 +129,13 @@ sensors such as GRAB-DA or nLightG.
 
 See the [list of optical components](Part%20Lists/Optical%20paths.csv).
 
+<p align="center">
+<img src = "Figures/Fig_Optics.png" alt="Optic setup" width="500">
+</p>
+
+**Figure 4. The assembled set up.** The optical path, the LED drivers and the microcontrollers
+mounted on a single breadboard. Dashed boxes mark the components labelled in Figure 3.
+
 1. **Assemble both dichroic cubes** (Thorlabs #C4W). Fix the bottom plates (B1C). Attach the
    dichroic filter holder (FFM1) to the rotating platform (B3C) and temporarily fix each
    platform on top of the cubes. Join the cubes with the C4W-CC piece. Mount the cubes on
