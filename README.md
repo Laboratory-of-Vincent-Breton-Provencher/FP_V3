@@ -185,7 +185,7 @@ The case is 3D printed; the model is [available here](3D%20print/).
 ### 4.1 Controller (Arduino Nano) — `FP_camLED_controller.ino`
 
 Reads the requested mode on D10–D12 and drives the camera and the LED drivers on a fixed
-40 Hz schedule. Upload once; it then runs from any USB power source.
+40 Hz schedule. Upload once; it then runs from any USB power source. LED drivers need to be running in trigger mode (TRIG).
 
 | Pin | Direction | Connected to |
 |---|---|---|
@@ -394,7 +394,7 @@ the layout is remembered for next time.
 
 ## 7. Recording
 
-**Before recording:** Connect the fibers to the fiber adapter. Measure the **470 nm** output of each: adjust into the 30–50 µW range.
+**Before recording:** Connect the fibers to the fiber adapter. With the LED driver set to constant current mode (CW), measure the **470 nm** output of each fiber. Adjust each of them into the 30–50 µW range. Put back to LED driver to trigger mode (TRIG).
 
 1. Connect the fibers to the implanted ferrules.
 2. Adjust the power on the **405 nm** channel:
