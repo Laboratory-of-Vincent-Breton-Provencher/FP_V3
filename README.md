@@ -150,7 +150,7 @@ mounted on a single breadboard.
 
 ### Alignment
 
-Perform these alignment steps in the dark. The target output is **35–55 µW per fiber per
+Perform these alignment steps in the dark. The target output is **30–50 µW per fiber per
 wavelength**, and the fiber bundle must stay inside the camera frame throughout.
 
 1. **Align the dichroics.** Remove the fiber adapter (CXY1A) and place a power meter in
@@ -190,7 +190,7 @@ Reads the requested mode on D10–D12 and drives the camera and the LED drivers 
 | Pin | Direction | Connected to |
 |---|---|---|
 | D2 | out | Camera trigger (both cameras, Line 3 in SpinView).  For more pin info [click here](https://softwareservices.flir.com/BFS-U3-50S5/latest/50-Quality/GPIOTest.htm)|
-| D4 | out | 410 nm LED driver, and DAQ D4 |
+| D4 | out | 405 nm LED driver, and DAQ D4 |
 | D5 | out | 470 nm LED driver, and DAQ D5 |
 | D10, D11, D12 | in | Mode lines V, B, G from DAQ D10, D11, D12 |
 | GND | — | Common ground with DAQ, camera and LED drivers |
@@ -215,7 +215,7 @@ driver lines, and prints one line per frame at **250000 baud**.
 
 | Pin | Direction | Connected to |
 |---|---|---|
-| D4, D5 | in | Controller's 410 / 470 driver lines |
+| D4, D5 | in | Controller's 405 / 470 driver lines |
 | D8 | in | External TTL (e.g. trial start from a behaviour system) |
 | D10, D11, D12 | out | Mode lines V, B, G to controller D10, D11, D12. These required pull-down resistors (10 kΩ to ground). |
 | GND | — | Common ground |
@@ -228,24 +228,21 @@ lower case; anything else, including line endings, is ignored.
 | Command | Mode (VBG) | LEDs cycled, one per frame | Per-channel rate at 40 fps |
 |---|---|---|---|
 | `0` | 000 | OFF | — |
-| `V` | 100 | 410 | 40 Hz |
+| `V` | 100 | 405 | 40 Hz |
 | `B` | 010 | 470 | 40 Hz |
 | `G` | 001 | 565 | 40 Hz |
-| `Y` | 110 | 410, 470 | 20 Hz |
-| `M` | 101 | 410, 565 | 20 Hz |
+| `Y` | 110 | 405, 470 | 20 Hz |
+| `M` | 101 | 405, 565 | 20 Hz |
 | `C` | 011 | 470, 565 | 20 Hz |
-| `X` | 111 | 410, 470, 565 | 13.3 Hz |
+| `X` | 111 | 405, 470, 565 | 13.3 Hz |
 
 The system boots in OFF and stays there until a command arrives, so nothing is illuminated
 or triggered until you ask for it. Changing mode restarts the LED cycle at the first
-enabled wavelength, which is why each recording block starts on 410.
+enabled wavelength, which is why each recording block starts on 405.
 
 > **Note.** The controller and the DAQ implement modes for a third excitation source
 > (565 nm), but the current setup uses only 405 and 470 nm. 
 > 
-> Because a 410/10 bandpass
-> filter sits in front of the 405 nm LED, this channel is referred to as either 405 or 410
-> throughout the system; `410` is the value written in the `Channel` column of the CSV.
 
 ### 4.4 Line format sent by the DAQ
 
@@ -402,13 +399,13 @@ into the 30–50 µW range. Put back to LED driver to trigger mode (TRIG).
 
 1. Connect the fibers to the implanted ferrules.
 2. Adjust the power on the **405 nm** channel:
-   2a.Start the Bonsai workflow and press the **Record** toggle button. This sends `Y` (410/470) to the DAQ and starts the LEDs,
+   2a.Start the Bonsai workflow and press the **Record** toggle button. This sends `Y` (405/470) to the DAQ and starts the LEDs,
       the camera and the CSV writing.
    2b. Adjust the **405 nm** channel with its knob until its trace matches the 470 nm trace in
       the live graphs.
    2c. Press the **Record** toggle again to stop. Stop the Bonsai workflow and delete the files that were saved during the adjustment.
 3. Start the Bonsai workflow.
-4. Press the **Record** toggle button. This sends `Y` (410/470) to the DAQ and starts the LEDs,
+4. Press the **Record** toggle button. This sends `Y` (405/470) to the DAQ and starts the LEDs,
    the camera and the CSV writing.
 5. During the recording, watch the live traces and check that TTLs are being detected. If TTLs are to be recorded, confirm the cable is connected to DAQ D8.
 6. Press **Record** again to stop. This sends `0`, which stops the LEDs and the triggers.
@@ -417,7 +414,7 @@ into the 30–50 µW range. Put back to LED driver to trigger mode (TRIG).
 
 Toggling the record button on and off during a session is safe. Each block appears in the
 CSV as a continuous run of frames, separated by a gap in the timestamps, and each block
-starts on 410.
+starts on 405.
 
 ---
 
@@ -434,10 +431,10 @@ One CSV per workflow run, named `FP_1ch_<timestamp>.csv`, with a header row.
 | `ts_arduino_ttl` | DAQ | `micros()` of the TTL rising edge, 0 if none |
 | `ts_ch1` | Camera | Camera chunk timestamp, in nanoseconds |
 | `f0_ch1` … `f3_ch1` | Camera | Mean pixel intensity in each fiber ROI |
-| `Channel` | Bonsai | `410`, `470` or `565`, derived from V/B/G |
+| `Channel` | Bonsai | `405`, `470` or `565`, derived from V/B/G |
 
 To split violet and blue, filter on `Channel` rather than on row parity: the sequence
-restarts at 410 after every mode change, so parity is not reliable across blocks.
+restarts at 405 after every mode change, so parity is not reliable across blocks.
 
 **Choose one clock and stay with it.** The Arduino and camera clocks differ by roughly
 470 ppm, which is about 3.4 s over a 2 hour recording. `ts_ch1` is the one attached to the
@@ -453,8 +450,8 @@ external TTL events, since `ts_arduino_ttl` comes from the same clock.
 **Channel labelling.** The camera is configured to trigger on the falling edge, which is
 the start of the excitation window, so each image corresponds to the LED named on its own
 row. Re-check this after any change to the trigger settings or to the controller sketch:
-run in `Y` mode and block the 410 nm LED, or turn its driver output down to zero. In the
-CSV, every row labelled `410` should then be dark and every `470` row bright. If the dark
+run in `Y` mode and block the 405 nm LED, or turn its driver output down to zero. In the
+CSV, every row labelled `405` should then be dark and every `470` row bright. If the dark
 rows carry the `470` label instead, the images are offset by one frame from their labels,
 which means the trigger activation has been switched to the rising edge.
 
