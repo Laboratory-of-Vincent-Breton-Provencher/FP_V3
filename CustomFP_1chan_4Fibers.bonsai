@@ -14,7 +14,7 @@
     <Nodes>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="StringProperty">
-          <Value>COM4</Value>
+          <Value>COM7</Value>
         </Combinator>
       </Expression>
       <Expression xsi:type="rx:BehaviorSubject">
@@ -42,7 +42,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:CreateSerialPort">
-                <port:PortName>COM4</port:PortName>
+                <port:PortName>COM7</port:PortName>
                 <port:BaudRate>250000</port:BaudRate>
                 <port:NewLine>\r\n</port:NewLine>
                 <port:Parity>None</port:Parity>
@@ -73,7 +73,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialWriteLine">
-                <port:PortName>COM4</port:PortName>
+                <port:PortName>COM7</port:PortName>
               </Combinator>
             </Expression>
           </Nodes>
@@ -140,7 +140,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialWriteLine">
-                <port:PortName>COM4</port:PortName>
+                <port:PortName>COM7</port:PortName>
               </Combinator>
             </Expression>
             <Expression xsi:type="rx:Condition">
@@ -171,7 +171,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialWriteLine">
-                <port:PortName>COM4</port:PortName>
+                <port:PortName>COM7</port:PortName>
               </Combinator>
             </Expression>
           </Nodes>
@@ -229,78 +229,78 @@
                 <cv:Regions>
                   <cv:ArrayOfPoint>
                     <cv:Point>
-                      <cv:X>342</cv:X>
-                      <cv:Y>0</cv:Y>
+                      <cv:X>346</cv:X>
+                      <cv:Y>105</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>563</cv:X>
-                      <cv:Y>0</cv:Y>
+                      <cv:X>506</cv:X>
+                      <cv:Y>110</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>542</cv:X>
-                      <cv:Y>49</cv:Y>
+                      <cv:X>517</cv:X>
+                      <cv:Y>209</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>463</cv:X>
-                      <cv:Y>74</cv:Y>
+                      <cv:X>425</cv:X>
+                      <cv:Y>285</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>382</cv:X>
-                      <cv:Y>58</cv:Y>
-                    </cv:Point>
-                  </cv:ArrayOfPoint>
-                  <cv:ArrayOfPoint>
-                    <cv:Point>
-                      <cv:X>79</cv:X>
-                      <cv:Y>193</cv:Y>
-                    </cv:Point>
-                    <cv:Point>
-                      <cv:X>261</cv:X>
-                      <cv:Y>193</cv:Y>
-                    </cv:Point>
-                    <cv:Point>
-                      <cv:X>261</cv:X>
-                      <cv:Y>362</cv:Y>
-                    </cv:Point>
-                    <cv:Point>
-                      <cv:X>79</cv:X>
-                      <cv:Y>362</cv:Y>
+                      <cv:X>328</cv:X>
+                      <cv:Y>225</cv:Y>
                     </cv:Point>
                   </cv:ArrayOfPoint>
                   <cv:ArrayOfPoint>
                     <cv:Point>
-                      <cv:X>585</cv:X>
-                      <cv:Y>112</cv:Y>
+                      <cv:X>2</cv:X>
+                      <cv:Y>312</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>719</cv:X>
-                      <cv:Y>112</cv:Y>
+                      <cv:X>184</cv:X>
+                      <cv:Y>312</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>719</cv:X>
-                      <cv:Y>272</cv:Y>
+                      <cv:X>184</cv:X>
+                      <cv:Y>481</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>585</cv:X>
-                      <cv:Y>272</cv:Y>
+                      <cv:X>2</cv:X>
+                      <cv:Y>481</cv:Y>
                     </cv:Point>
                   </cv:ArrayOfPoint>
                   <cv:ArrayOfPoint>
                     <cv:Point>
-                      <cv:X>360</cv:X>
-                      <cv:Y>355</cv:Y>
+                      <cv:X>0</cv:X>
+                      <cv:Y>349</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>526</cv:X>
-                      <cv:Y>355</cv:Y>
+                      <cv:X>134</cv:X>
+                      <cv:Y>349</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>526</cv:X>
-                      <cv:Y>508</cv:Y>
+                      <cv:X>134</cv:X>
+                      <cv:Y>509</cv:Y>
                     </cv:Point>
                     <cv:Point>
-                      <cv:X>360</cv:X>
-                      <cv:Y>508</cv:Y>
+                      <cv:X>0</cv:X>
+                      <cv:Y>509</cv:Y>
+                    </cv:Point>
+                  </cv:ArrayOfPoint>
+                  <cv:ArrayOfPoint>
+                    <cv:Point>
+                      <cv:X>3</cv:X>
+                      <cv:Y>323</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>169</cv:X>
+                      <cv:Y>323</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>169</cv:X>
+                      <cv:Y>476</cv:Y>
+                    </cv:Point>
+                    <cv:Point>
+                      <cv:X>3</cv:X>
+                      <cv:Y>476</cv:Y>
                     </cv:Point>
                   </cv:ArrayOfPoint>
                 </cv:Regions>
@@ -382,7 +382,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialReadLine">
-                <port:PortName>COM4</port:PortName>
+                <port:PortName>COM7</port:PortName>
                 <port:NewLine>\r\n</port:NewLine>
               </Combinator>
             </Expression>
@@ -401,7 +401,7 @@
               <Selector>Item2</Selector>
             </Expression>
             <Expression xsi:type="Parse">
-              <Pattern>%i</Pattern>
+              <Pattern>%l</Pattern>
               <Separator>,</Separator>
             </Expression>
             <Expression xsi:type="MemberSelector">

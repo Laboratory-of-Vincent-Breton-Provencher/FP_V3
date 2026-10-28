@@ -55,6 +55,7 @@ const uint8_t TTL = 8;  // external TTL; D8 = PB0 = PCINT0 (pin-change interrupt
 int mode = START_MODE;
 int prevV = 0, prevB = 0, prevG = 0;
 int FLAG = 0;  // 0-99, wraps; one tick per logged frame
+unsigned long t_0 = micros();
 
 // Set by the interrupt, cleared when reported in a log line
 volatile bool ttlRose = false;
@@ -131,7 +132,9 @@ void loop() {
         cli();
         ttlRose = false;
         SREG = sreg;
+        
       }
+      t_0 = micros();
       mode = newMode;
       writeModePins(mode);
     }
@@ -143,7 +146,7 @@ void loop() {
 
   // Onset of a frame = rising edge on any LED line
   if ((valV && !prevV) || (valB && !prevB) || (valG && !prevG)) {
-    unsigned long tOnset = micros();
+    unsigned long tOnset = micros() - t_0;
 
     // Take and clear the latched TTL edge atomically
     uint8_t sreg = SREG;
