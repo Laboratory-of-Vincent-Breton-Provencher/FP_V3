@@ -429,7 +429,7 @@
         </Workflow>
       </Expression>
       <Expression xsi:type="scr:ExpressionTransform">
-        <scr:Expression>new(item1[0] as V, item1[1] as B,    item1[2] as G,    item1[3] as TTL,    item1[4] as mode,    item1[6] as ts_arduino,  item1[7] as ts_arduino_ttl,    item2.item1 as ts_ch1,    item2.item2 as f0_ch1,    item2.item3 as f1_ch1,    item2.item4 as f2_ch1, item2.item5 as f3_ch1,    (item1[0]==1 ? "410" : (item1[1]==1 ? "470" : (item1[2]==1 ? "565" : "unknown"))) as Channel)</scr:Expression>
+        <scr:Expression>new(item1[0] as V, item1[1] as B,    item1[2] as G,    item1[3] as TTL,    item1[4] as mode,    item1[6] as ts_arduino,  item1[7] as ts_arduino_ttl,    item2.item1 as ts_ch1,    item2.item2 as f0_ch1,    item2.item3 as f1_ch1,    item2.item4 as f2_ch1, item2.item5 as f3_ch1,    (item1[0]==1 ? "415" : (item1[1]==1 ? "470" : (item1[2]==1 ? "565" : "unknown"))) as Channel)</scr:Expression>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
         <io:FileName>FP_1ch_.csv</io:FileName>
