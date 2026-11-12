@@ -14,7 +14,7 @@
     <Nodes>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="StringProperty">
-          <Value>COM7</Value>
+          <Value>COM4</Value>
         </Combinator>
       </Expression>
       <Expression xsi:type="rx:BehaviorSubject">
@@ -42,7 +42,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:CreateSerialPort">
-                <port:PortName>COM7</port:PortName>
+                <port:PortName>COM4</port:PortName>
                 <port:BaudRate>250000</port:BaudRate>
                 <port:NewLine>\r\n</port:NewLine>
                 <port:Parity>None</port:Parity>
@@ -73,7 +73,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialWriteLine">
-                <port:PortName>COM7</port:PortName>
+                <port:PortName>COM4</port:PortName>
               </Combinator>
             </Expression>
           </Nodes>
@@ -106,7 +106,7 @@
               <gui:Visible>true</gui:Visible>
               <gui:Font>Microsoft Sans Serif, 27.75pt, style=Bold, Italic</gui:Font>
               <gui:Text>Record</gui:Text>
-              <gui:Checked>false</gui:Checked>
+              <gui:Checked>true</gui:Checked>
             </Expression>
             <Expression xsi:type="rx:Condition">
               <Workflow>
@@ -140,7 +140,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialWriteLine">
-                <port:PortName>COM7</port:PortName>
+                <port:PortName>COM4</port:PortName>
               </Combinator>
             </Expression>
             <Expression xsi:type="rx:Condition">
@@ -171,7 +171,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialWriteLine">
-                <port:PortName>COM7</port:PortName>
+                <port:PortName>COM4</port:PortName>
               </Combinator>
             </Expression>
           </Nodes>
@@ -194,7 +194,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="spk:SpinnakerCapture">
           <spk:Index xsi:nil="true" />
-          <spk:SerialNumber>24208732</spk:SerialNumber>
+          <spk:SerialNumber>24012843</spk:SerialNumber>
           <spk:ColorProcessing>Default</spk:ColorProcessing>
         </Combinator>
       </Expression>
@@ -220,6 +220,31 @@
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>ChunkData.Timestamp</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Take">
+                <rx:Count>1</rx:Count>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:WithLatestFrom" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>item1-item2</scr:Expression>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>ChunkData.FrameID</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Take">
+                <rx:Count>1</rx:Count>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:WithLatestFrom" />
+            </Expression>
+            <Expression xsi:type="scr:ExpressionTransform">
+              <scr:Expression>item1-item2</scr:Expression>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>Image</Selector>
@@ -346,22 +371,32 @@
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
-            <Edge From="0" To="2" Label="Source1" />
-            <Edge From="1" To="12" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="0" To="5" Label="Source1" />
+            <Edge From="0" To="9" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
             <Edge From="3" To="4" Label="Source1" />
-            <Edge From="3" To="6" Label="Source1" />
-            <Edge From="3" To="8" Label="Source1" />
-            <Edge From="3" To="10" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="12" Label="Source2" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="12" Label="Source3" />
-            <Edge From="8" To="9" Label="Source1" />
-            <Edge From="9" To="12" Label="Source4" />
+            <Edge From="4" To="19" Label="Source1" />
+            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="5" To="7" Label="Source1" />
+            <Edge From="6" To="7" Label="Source2" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="8" To="19" Label="Source2" />
+            <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
-            <Edge From="11" To="12" Label="Source5" />
-            <Edge From="12" To="13" Label="Source1" />
+            <Edge From="10" To="13" Label="Source1" />
+            <Edge From="10" To="15" Label="Source1" />
+            <Edge From="10" To="17" Label="Source1" />
+            <Edge From="11" To="12" Label="Source1" />
+            <Edge From="12" To="19" Label="Source3" />
+            <Edge From="13" To="14" Label="Source1" />
+            <Edge From="14" To="19" Label="Source4" />
+            <Edge From="15" To="16" Label="Source1" />
+            <Edge From="16" To="19" Label="Source5" />
+            <Edge From="17" To="18" Label="Source1" />
+            <Edge From="18" To="19" Label="Source6" />
+            <Edge From="19" To="20" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -382,7 +417,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="port:SerialReadLine">
-                <port:PortName>COM7</port:PortName>
+                <port:PortName>COM4</port:PortName>
                 <port:NewLine>\r\n</port:NewLine>
               </Combinator>
             </Expression>
@@ -429,7 +464,7 @@
         </Workflow>
       </Expression>
       <Expression xsi:type="scr:ExpressionTransform">
-        <scr:Expression>new(item1[0] as V, item1[1] as B,    item1[2] as G,    item1[3] as TTL,    item1[4] as mode,    item1[6] as ts_arduino,  item1[7] as ts_arduino_ttl,    item2.item1 as ts_ch1,    item2.item2 as f0_ch1,    item2.item3 as f1_ch1,    item2.item4 as f2_ch1, item2.item5 as f3_ch1,    (item1[0]==1 ? "415" : (item1[1]==1 ? "470" : (item1[2]==1 ? "565" : "unknown"))) as Channel)</scr:Expression>
+        <scr:Expression>new(item1[0] as V, item1[1] as B,    item1[2] as G,    item1[3] as TTL,    item1[4] as mode,    item1[6] as ts_arduino,  item1[7] as ts_arduino_ttl,    item2.item1 as ts_ch1, item2.item2 as frameid_ch1,    item2.item3 as f0_ch1,    item2.item4 as f1_ch1,    item2.item5 as f2_ch1, item2.item6 as f3_ch1,    (item1[0]==1 ? "415" : (item1[1]==1 ? "470" : (item1[2]==1 ? "565" : "unknown"))) as Channel)</scr:Expression>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
         <io:FileName>FP_1ch_.csv</io:FileName>
